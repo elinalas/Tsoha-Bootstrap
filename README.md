@@ -3,7 +3,7 @@
 Yleisiä linkkejä:
 
 * [Linkki sovellukseeni](https://elinalas.users.helsinki.fi/kilpailujarjestelma)
-* [Linkki dokumentaatiooni](https://www.github.com/elinalas/Tsoha-Bootstrap)
+* [Linkki dokumentaatiooni](https://github.com/elinalas/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
 
 ## Työn aihe
 
