@@ -1,10 +1,10 @@
-# Tietokantasovelluksen esittelysivu
+# Kilpailujärjestelmä
 
 Yleisiä linkkejä:
 
-* [Linkki sovellukseeni](https://www.cs.helsinki.fi)
-* [Linkki dokumentaatiooni](https://www.github.com)
+* [Linkki sovellukseeni](https://elinalas.users.helsinki.fi/kilpailujarjestelma)
+* [Linkki dokumentaatiooni](https://www.github.com/elinalas/Tsoha-Bootstrap)
 
 ## Työn aihe
 
-Laita tähän aihekuvaus tai [linkki valmiiseen aiheeseen](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Pokemon-kanta.html) 
+Kilpailujärjestelmän ideana on helpottaa ratsastuskilpailujen järjestäjien työtä lähtömaksujen seuraamisessa. Sovelluksen kautta voi myös ilmoittautua kilpailuihin.
