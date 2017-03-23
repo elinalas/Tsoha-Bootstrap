@@ -59,4 +59,13 @@
   $routes->get('/lisaa_kilpailu', function() {
     HelloWorldController::lisaa_kilpailu();
   });
+  
+  $routes->get('/luo_kayttaja', function() {
+    HelloWorldController::luo_kayttaja();
+  });
+  
+  $routes->get('/kirjaudu_sisaan', function() {
+    HelloWorldController::kirjaudu_sisaan();
+  });
+ 
  

@@ -63,4 +63,12 @@
      public static function lisaa_hevonen(){    
       View::make('lisaa_hevonen.html');
     }
+    
+     public static function luo_kayttaja(){    
+      View::make('luo_kayttaja.html');
+    }
+    
+     public static function kirjaudu_sisaan(){    
+      View::make('kirjaudu_sisaan.html');
+    }
   }
