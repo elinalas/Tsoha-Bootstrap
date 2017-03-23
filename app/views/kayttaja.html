@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Elina Lassila</h1>
+  <!-- Painikkeet tähän -->
+  <p>
+    <button class="btn btn-danger">Poista</button>
+  </p>
+  <!-- Tiedot tulee listana tähän -->
+  <ul>
+    <li><strong>Jäsennumero </strong> 28279949</li>
+    <li><strong>Status </strong> <label class="label label-danger">Ylläpitäjä</label></li>
+  </ul>
+  
+  <h2>Osallistumiset:</h2>
+  
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Kilpailu</th>
+        <th>Hevonen</th>
+        <th>Ratsastaja</th>
+        <th>Ratsastajan jäsennro</th>
+        <th>Maksustatus</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <!-- Listataan pelit tähän -->
+      <tr>
+          <td><a href="#">Helppo C</a></td>
+        <td><a href="#">Rodmens</a></td>
+        <td>Elina Lassila</td>
+        <td>28279949</td>
+        <td><label class="label label-danger">Ei maksettu</label></td>
+        <th><a class="btn btn-default btn-sm" href="/kilpailujarjestelma/muokkaa_osallistuminen">Muokkaa</a></th>
+      </tr>
+    </tbody>
+  </table>
+  
+  <h2>Hevoset: </h2>
+  
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Nimi</th>
+        <th>Rekisterinumero</th>
+        <th>Kokoluokka</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <!-- Listataan pelit tähän -->
+      <tr>
+        <td><a href="/kilpailujarjestelma/hevonen">Rodmens</a></td>
+        <td>428034327750002</td>
+        <td>Hevonen</td>
+      </tr>
+    </tbody>
+  </table>
+ 
+{% endblock %}

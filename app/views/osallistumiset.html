@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Kaikki osallistumiset</h1>
+  
+    <p>
+    <a href="/kilpailujarjestelma/lisaa_osallistuminen" class="btn btn-success">Lisää osallistuminen</a>
+  </p>
+
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Kilpailu</th>
+        <th>Hevonen</th>
+        <th>Ratsastaja</th>
+        <th>Ratsastajan jäsennro</th>
+        <th>Maksustatus</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <!-- Listataan pelit tähän -->
+      <tr>
+          <td><a href="/kilpailujarjestelma/kilpailu">Helppo C</a></td>
+        <td><a href="/kilpailujarjestelma/hevonen">Rodmens</a></td>
+        <td>Elina Lassila</td>
+        <td>28279949</td>
+        <td><label class="label label-danger">Ei maksettu</label></td>
+        <th><a class="btn btn-default btn-sm" href="/kilpailujarjestelma/muokkaa_osallistuminen">Muokkaa</a></th>
+      </tr>
+    </tbody>
+  </table>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Käyttäjät</h1>
+
+
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Nimi</th>
+        <th>Jäsennumero</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <!-- Listataan pelit tähän -->
+      <tr>
+        <td><a href="/kilpailujarjestelma/kayttaja">Elina Lassila</a></td>
+        <td>28279949</td>
+        <td><label class="label label-danger">Ylläpitäjä</label></td>
+      </tr>
+    </tbody>
+  </table>
+{% endblock %}

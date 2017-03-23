@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Lisaa kilpailu</h1>
+
+<form>
+   
+    <div class="form-group">
+      <label>Päivämäärä</label>
+      Muodossa 00.00.0000
+      <input type="text" class="form-control" value="">
+    </div>
+    <div class="form-group">
+      <label>Kilpailun nimi</label>
+      esim. Helppo C tai 100 cm
+      <input type="text" class="form-control" value="">
+    </div>
+    <div class="form-group">
+      <label>Tasoluokitus</label>
+      1./2./3. taso
+      <input type="text" class="form-control" value="">
+    </div>
+    <div class="form-group">
+      <label>Kilpailupaikka</label>
+      <input type="text" class="form-control" value="">
+    </div>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-danger">Tallenna</button>
+      <button type="submit" class="btn btn-primary">Peruuta</button>
+      
+    </div>
+
+  </form>
+{% endblock %}

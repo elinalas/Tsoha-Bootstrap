@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Muokkaa kilpailua</h1>
+
+  <form>
+   
+    <div class="form-group">
+      <label>Päivämäärä</label>
+      <input type="text" class="form-control" value="20.04.2017">
+    </div>
+    <div class="form-group">
+      <label>Kilpailun nimi</label>
+      <input type="text" class="form-control" value="Helppo C">
+    </div>
+    <div class="form-group">
+      <label>Tasoluokitus</label>
+      <input type="text" class="form-control" value="1. taso">
+    </div>
+    <div class="form-group">
+      <label>Kilpailupaikka</label>
+      <input type="text" class="form-control" value="Hauska Ratsutalli">
+    </div>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-danger">Tallenna</button>
+      <button type="submit" class="btn btn-primary">Peruuta</button>
+      
+    </div>
+
+  </form>
+{% endblock %}
