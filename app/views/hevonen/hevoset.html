@@ -15,15 +15,16 @@
         <th></th>
       </tr>
     </thead>
-
     <tbody>
-      <!-- Listataan pelit tähän -->
+        {% for hevonen in hepat %}
       <tr>
-        <td><a href="/kilpailujarjestelma/hevonen">Rodmens</a></td>
-        <td>428034327750002</td>
-        <td><a href="/kilpailujarjestelma/kayttaja">Elina Lassila</a></td>
-        <td>Hevonen</td>
+        <td><a href="/kilpailujarjestelma/hevonen/{{hevonen.rekisterinumero}}">{{hevonen.nimi}}</a></td>
+        <td>{{hevonen.rekisterinumero}}</td>
+        <td><a href="/kilpailujarjestelma/kayttaja/{{hevonen.omistaja}}">{{hevonen.omistaja}}</a></td>
+        <td>{{hevonen.kokoluokka}}</td>
       </tr>
+      
+      {% endfor %}
     </tbody>
   </table>
 {% endblock %}

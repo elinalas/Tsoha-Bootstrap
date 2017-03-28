@@ -17,7 +17,7 @@
   });
   
   $routes->get('/hevoset', function() {
-    HelloWorldController::hevoset();
+    HevonenController::index();
   });
   
   $routes->get('/osallistumiset', function() {
@@ -40,8 +40,8 @@
     HelloWorldController::kilpailu();
   });
   
-  $routes->get('/hevonen', function() {
-    HelloWorldController::hevonen();
+  $routes->get('/hevonen/:rekisterinumero', function($rekisterinumero) {
+    HevonenController::show($rekisterinumero);
   });
   
   $routes->get('/osallistuminen', function() {
