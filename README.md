@@ -1,22 +1,18 @@
 # Kilpailujärjestelmä
 
-Yleisiä linkkejä:
+Viikko 3 toiminnallisuus toteutettu sivuilla:
+Huomaathan, että uusia hevosia voi lisätä vain valmiilla käyttäjien rekisterinumeroilla! Muut sivut ovat vielä keskeneräisiä tai niissä on virheitä.
 
 * [Linkki sovellukseeni](https://elinalas.users.cs.helsinki.fi/kilpailujarjestelma)
 * [Hevoset](https://elinalas.users.cs.helsinki.fi/kilpailujarjestelma/hevoset)
 * [Hevonen](https://elinalas.users.cs.helsinki.fi/kilpailujarjestelma/hevonen)
 * [Lisää hevonen](https://elinalas.users.cs.helsinki.fi/kilpailujarjestelma/lisaa_hevonen)
-* [Käyttäjät](https://elinalas.users.cs.helsinki.fi/kilpailujarjestelma/kayttajat)
-* [Käyttäjä](https://elinalas.users.cs.helsinki.fi/kilpailujarjestelma/kayttaja)
-* [Luo käyttäjä](https://elinalas.users.cs.helsinki.fi/kilpailujarjestelma/luo_kayttaja)
-* [Osallistumiset](https://elinalas.users.cs.helsinki.fi/kilpailujarjestelma/osallistumiset)
-* [Osallistuminen](https://elinalas.users.cs.helsinki.fi/kilpailujarjestelma/osallistuminen)
-* [Muokkaa osallistumista](https://elinalas.users.cs.helsinki.fi/kilpailujarjestelma/muokkaa_osallistuminen)
-* [Lisää osallistuminen](https://elinalas.users.cs.helsinki.fi/kilpailujarjestelma/lisaa_osallistuminen)
-* [Kilpailut](https://elinalas.users.cs.helsinki.fi/kilpailujarjestelma/kilpailut)
-* [Kilpailu](https://elinalas.users.cs.helsinki.fi/kilpailujarjestelma/kilpailu)
-* [Muokkaa kilpailua](https://elinalas.users.cs.helsinki.fi/kilpailujarjestelma/muokkaa_kilpailu)
-* [Lisää kilpailu](https://elinalas.users.cs.helsinki.fi/kilpailujarjestelma/lisaa_kilpailu)
+
+
+
+
+
+
 * [Linkki dokumentaatiooni](https://github.com/elinalas/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
 
 ## Työn aihe
