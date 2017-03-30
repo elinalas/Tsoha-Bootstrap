@@ -19,15 +19,16 @@
     </thead>
 
     <tbody>
-      <!-- Listataan pelit tähän -->
+        {% for osallistuminen in osallistumiset %}
       <tr>
-          <td><a href="/kilpailujarjestelma/kilpailu">Helppo C</a></td>
-        <td><a href="/kilpailujarjestelma/hevonen">Rodmens</a></td>
-        <td>Elina Lassila</td>
-        <td>28279949</td>
+          <td><a href="/kilpailujarjestelma/kilpailu/{{osallistuminen.kilpailu}}">{{osallistuminen.kilpailu}}</a></td>
+        <td><a href="/kilpailujarjestelma/hevonen/{{osallistuminen.hevonen}}">{{osallistuminen.hevonen}}</a></td>
+        <td>{{osallistuminen.ratsastaja}}</td>
+        <td>{{osallistuminen.ratsastajan_jasennumero}}</td>
         <td><label class="label label-danger">Ei maksettu</label></td>
         <th><a class="btn btn-default btn-sm" href="/kilpailujarjestelma/muokkaa_osallistuminen">Muokkaa</a></th>
       </tr>
+      {% endfor %}
     </tbody>
   </table>
 {% endblock %}

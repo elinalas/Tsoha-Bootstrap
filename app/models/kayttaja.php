@@ -23,7 +23,7 @@
       $kayttajat[] = new Kayttaja(array(
         'nimi' => $row['nimi'],
         'jasennumero' => $row['jasennumero'],
-        'status' => $row['status']
+        'status' => isset($row['status'])
       ));
     }
 
@@ -39,7 +39,7 @@
       $kayttaja = new Kayttaja(array(
         'nimi' => $row['nimi'],
         'jasennumero' => $row['jasennumero'],
-        'status' => $row['status']
+        'status' => isset($row['status'])
       ));
 
       return $kayttaja;
@@ -47,5 +47,11 @@
 
     return null;
   }
+  
+  public function save() {
+        $query = DB::connection()->prepare('INSERT INTO Kayttaja (nimi, jasennumero) VALUES (:nimi, :jasennumero)');
+        $query->execute(array('nimi' => $this->nimi, 'jasennumero' => $this->jasennumero));
+        $row = $query->fetch();
+    }
   
   }

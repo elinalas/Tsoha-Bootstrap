@@ -19,13 +19,15 @@
 
     <tbody>
       <!-- Listataan pelit tähän -->
+      {% for kilpailu in kilpailut%}
       <tr>
-        <td>20.04.2017</td>
-        <td><a href="/kilpailujarjestelma/kilpailu">Helppo C</a></td>
-        <td>1. taso</td>
-        <td>Hauska Ratsutalli</td>
+        <td>{{kilpailu.paivamaara}}</td>
+        <td><a href="/kilpailujarjestelma/kilpailu/{{kilpailu.id}}">{{kilpailu.nimi}}</a></td>
+        <td>{{kilpailu.tasoluokitus}}</td>
+        <td>{{kilpailu.kilpailupaikka}}</td>
         <th><a class="btn btn-default btn-sm" href="/kilpailujarjestelma/muokkaa_kilpailu">Muokkaa kilpailua</a></th>
       </tr>
+      {% endfor %}
     </tbody>
   </table>
 {% endblock %}

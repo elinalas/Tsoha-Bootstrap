@@ -2,22 +2,21 @@
 {% block content %}
   <h1>Luo käyttäjä</h1>
 
-  <form>
+   <form method="post" action="{{base_path}}/kayttaja">
     <div class="form-group">
       <label>Nimi</label>
       Muodossa Etunimi Sukunimi
-      <input type="text" class="form-control" value="">
+      <input type="text" name='nimi' class="form-control">
     </div>
     <div class="form-group">
       <label>Jäsennumero</label>
       Jäsenliiton jäsennumero
-      <input type="text" class="form-control" value="">
+      <input type="text" name="jasennumero" class="form-control">
     </div>
 
     <div class="form-group">
       <button type="submit" class="btn btn-danger">Tallenna</button>
-      <button type="submit" class="btn btn-primary">Peruuta</button>
-      
+      <a href="{{base_path}}" class="btn btn-primary">Peruuta</a>
     </div>
 
   </form>

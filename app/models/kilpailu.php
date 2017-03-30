@@ -52,4 +52,50 @@
     return null;
   }
   
+  public static function findall($id){
+    $query = DB::connection()->prepare('SELECT * FROM Kilpailu WHERE id = :id LIMIT 1');
+    $query->execute(array('id' => $id));
+    $row = $query->fetch();
+
+    if($row){
+      $kilpailu = new Kilpailu(array(
+        'id' => $row['id'],
+        'paivamaara' => $row['paivamaara'],
+        'nimi' => $row['nimi'],
+        'tasoluokitus' => $row['tasoluokitus'],
+        'kilpailupaikka' => $row['kilpailupaikka']
+      ));
+
+      return $kilpailu;
+    }
+
+    return null;
+  }
+  
+  public static function findallosallistuminen($id){
+    $query = DB::connection()->prepare('SELECT * FROM Kilpailu WHERE id = :id LIMIT 1');
+    $query->execute(array('id' => $id));
+    $row = $query->fetch();
+
+    if($row){
+      $kilpailu = new Kilpailu(array(
+        'id' => $row['id'],
+        'paivamaara' => $row['paivamaara'],
+        'nimi' => $row['nimi'],
+        'tasoluokitus' => $row['tasoluokitus'],
+        'kilpailupaikka' => $row['kilpailupaikka']
+      ));
+
+      return $kilpailu;
+    }
+
+    return null;
+  }
+  
+   public function save() {
+        $query = DB::connection()->prepare('INSERT INTO Kilpailu (paivamaara, nimi, tasoluokitus, kilpailupaikka) VALUES (:paivamaara, :nimi, :tasoluokitus, :kilpailupaikka)');
+        $query->execute(array('paivamaara' => $this->paivamaara, 'nimi' => $this->nimi, 'tasoluokitus' => $this->tasoluokitus, 'kilpailupaikka' => $this->kilpailupaikka));
+        $row = $query->fetch();
+    }
+  
   }

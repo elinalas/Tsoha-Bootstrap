@@ -52,4 +52,44 @@
     return null;
   }
   
+  public static function findallkilpailu($kilpailu){
+    $query = DB::connection()->prepare('SELECT * FROM Osallistuminen WHERE kilpailu = :kilpailu');
+    $query->execute(array('kilpailu' => $kilpailu));
+    $row = $query->fetch();
+
+    if($row){
+      $osallistumiset[] = new Osallistuminen(array(
+        'id' => $row['id'],
+        'kilpailu' => $row['kilpailu'],
+        'hevonen' => $row['hevonen'],
+        'ratsastaja' => $row['ratsastaja'],
+        'ratsastajan_jasennumero' => $row['ratsastajan_jasennumero']  
+      ));
+
+      return $osallistumiset;
+    }
+
+    return null;
+  }
+  
+  public static function findallhevonen($hevonen){
+    $query = DB::connection()->prepare('SELECT * FROM Osallistuminen WHERE hevonen = :hevonen');
+    $query->execute(array('hevonen' => $hevonen));
+    $row = $query->fetch();
+
+    if($row){
+      $osallistumiset[] = new Osallistuminen(array(
+        'id' => $row['id'],
+        'kilpailu' => $row['kilpailu'],
+        'hevonen' => $row['hevonen'],
+        'ratsastaja' => $row['ratsastaja'],
+        'ratsastajan_jasennumero' => $row['ratsastajan_jasennumero']  
+      ));
+
+      return $osallistumiset;
+    }
+
+    return null;
+  }
+  
   }

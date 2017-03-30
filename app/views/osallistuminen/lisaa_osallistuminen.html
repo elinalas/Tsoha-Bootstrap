@@ -2,7 +2,7 @@
 {% block content %}
   <h1>Lisää osallistuminen</h1>
 
-  <form>
+<form method="post" action="{{base_path}}/kilpailu">
     <div class="form-group">
       <label>Kilpailu</label>      
             <select>
@@ -28,7 +28,7 @@
 
     <div class="form-group">
       <button type="submit" class="btn btn-danger">Tallenna</button>
-      <button type="submit" class="btn btn-primary">Peruuta</button>
+      <a href="{{base_path}}/osallistumiset" class="btn btn-primary">Peruuta</a>
       
     </div>
 

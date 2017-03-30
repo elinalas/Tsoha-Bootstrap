@@ -2,25 +2,30 @@
 {% block content %}
   <h1>Lisää hevonen</h1>
 
-  <form>
+  <form method="post" action="{{base_path}}/hevonen">
 
     <div class="form-group">
       <label>Nimi</label>
       Hevosen virallinen nimi
-      <input type="text" class="form-control" value="">
+      <input type="text" name="nimi" class="form-control">
     </div>
     <div class="form-group">
       <label>Rekisterinumero</label>
-      <input type="text" class="form-control" value="">
+      <input type="text" name="rekisterinumero" class="form-control">
+    </div>
+    <div class="form-group">
+      <label>Omistajan jäsennumero</label>
+      <input type="text" name="kayttaja" class="form-control">
     </div>
      <div class="form-group">
       <label>Kokoluokka</label>
-      <input type="text" class="form-control" value="">
-    </div>
+      <input type="text" name="kokoluokka" class="form-control">
+    </div>  
+    
 
     <div class="form-group">
       <button type="submit" class="btn btn-danger">Tallenna</button>
-      <button type="submit" class="btn btn-primary">Peruuta</button>
+      <a href="{{base_path}}/hevoset" class="btn btn-primary">Peruuta</a>
       
     </div>
 

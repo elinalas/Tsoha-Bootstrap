@@ -3,14 +3,13 @@
   <h1>Hevoset</h1>
 
   <p>
-    <a href="/kilpailujarjestelma/lisaa_hevonen" class="btn btn-success">Lisää hevonen</a>
+    <a href="{{base_path}}/lisaa_hevonen" class="btn btn-success">Lisää hevonen</a>
   </p>
   <table class="table table-striped table-bordered">
     <thead>
       <tr>
         <th>Nimi</th>
         <th>Rekisterinumero</th>
-        <th>Omistaja</th>
         <th>Kokoluokka</th>
         <th></th>
       </tr>
@@ -18,9 +17,8 @@
     <tbody>
         {% for hevonen in hepat %}
       <tr>
-        <td><a href="/kilpailujarjestelma/hevonen/{{hevonen.rekisterinumero}}">{{hevonen.nimi}}</a></td>
+        <td><a href="{{base_path}}/hevonen/{{hevonen.rekisterinumero}}">{{hevonen.nimi}}</a></td>
         <td>{{hevonen.rekisterinumero}}</td>
-        <td><a href="/kilpailujarjestelma/kayttaja/{{hevonen.omistaja}}">{{hevonen.omistaja}}</a></td>
         <td>{{hevonen.kokoluokka}}</td>
       </tr>
       

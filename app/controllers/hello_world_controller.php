@@ -21,10 +21,6 @@
       View::make('kayttajat.html');
     }
     
-    public static function hevoset(){    
-      View::make('hevoset.html');
-    }
-    
     public static function osallistumiset(){    
       View::make('osallistumiset.html');
     }
@@ -44,9 +40,6 @@
       View::make('osallistuminen.html');
     }
     
-     public static function hevonen(){    
-      View::make('hevonen.html');
-    }
     
      public static function kayttaja(){    
       View::make('kayttaja.html');

@@ -1,15 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Helppo C</h1>
+{% if message %}
+    <div class="alert alert-success">
+      {{message}}
+    </div>
+    {% endif %}
+  <h1>{{kilpailu.nimi}}</h1>
   <!-- Painikkeet tähän -->
   <p>
     <button class="btn btn-danger">Poista</button> <a href="/kilpailujarjestelma/muokkaa_kilpailu" class="btn btn-default">Muokkaa</a>
   </p>
   <!-- Tiedot tulee listana tähän -->
   <ul>
-    <li><strong>Päivämäärä: </strong> 20.04.2017</li>
-    <li><strong>Tasoluokitus: </strong> 1. taso</li>
-    <li><strong>Kilpailupaikka: </strong> Hauska Ratsutalli</li>
+    <li><strong>Päivämäärä: </strong>{{kilpailu.paivamaara}}</li>
+    <li><strong>Tasoluokitus: </strong>{{kilpailu.tasoluokka}}</li>
+    <li><strong>Kilpailupaikka: </strong>{{kilpailu.kilpailupaikka}}</li>
   </ul>
   
   <h2>Osallistumiset:</h2>
@@ -26,14 +31,22 @@
     </thead>
 
     <tbody>
+      {% for osallistuminen in osallistumiset %} 
+      {% for hevonen in hevoset %} 
       <!-- Listataan pelit tähän -->
       <tr>
-        <td><a href="/kilpailujarjestelma/hevonen">Rodmens</a></td>
-        <td>Elina Lassila</td>
-        <td>28279949</td>
+        <td><a href="{{base_path}}/hevonen/{{osallistuminen.hevonen}}">{{hevonen.nimi}}</a></td>
+        <td>{{osallistuminen.ratsastaja}}</td>
+        <td>{{osallistuminen.ratsastajan_jasennumero}}</td>
+        {% if status == false %}
         <td><label class="label label-danger">Ei maksettu</label></td>
+        {%else%}
+        <td><label class="label label-primary">Maksettu</label></td>
+        {%endif%}
         <th><a class="btn btn-default btn-sm" href="/kilpailujarjestelma/muokkaa_osallistuminen">Muokkaa</a></th>
       </tr>
+      {% endfor %}
+      {% endfor %}
     </tbody>
   </table>
   

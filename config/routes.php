@@ -3,17 +3,13 @@
   $routes->get('/', function() {
     HelloWorldController::index();
   });
-
-  $routes->get('/hiekkalaatikko', function() {
-    HelloWorldController::sandbox();
-  });
-
+  
   $routes->get('/kilpailut', function() {
-    HelloWorldController::kilpailut();
+    KilpailuController::index();
   });
 
   $routes->get('/kayttajat', function() {
-    HelloWorldController::kayttajat();
+    KayttajaController::index();
   });
   
   $routes->get('/hevoset', function() {
@@ -21,7 +17,7 @@
   });
   
   $routes->get('/osallistumiset', function() {
-    HelloWorldController::osallistumiset();
+    OsallistuminenController::index();
   });
   
   $routes->get('/muokkaa_osallistuminen', function() {
@@ -32,28 +28,36 @@
     HelloWorldController::muokkaa_kilpailu();
   });
   
-  $routes->get('/kayttaja', function() {
-    HelloWorldController::kayttaja();
+  $routes->get('/kayttaja/:jasennumero', function($jasennumero) {
+    KayttajaController::show($jasennumero);
   });
   
-  $routes->get('/kilpailu', function() {
-    HelloWorldController::kilpailu();
+  $routes->get('/kilpailu/:id', function($id) {
+    KilpailuController::show($id);
   });
   
   $routes->get('/hevonen/:rekisterinumero', function($rekisterinumero) {
     HevonenController::show($rekisterinumero);
   });
   
-  $routes->get('/osallistuminen', function() {
-    HelloWorldController::osallistuminen();
+  $routes->get('/osallistuminen/:id', function($id) {
+    OsallistuminenController::show($id);
   });
   
   $routes->get('/lisaa_osallistuminen', function() {
-    HelloWorldController::lisaa_osallistuminen();
+      OsallistuminenController::create();
+  });
+  
+  $routes->post('/osallistuminen', function() {
+      OsallistuminenController::store();
+  });
+  
+  $routes->post('/hevonen', function() {
+    HevonenController::store();
   });
   
   $routes->get('/lisaa_hevonen', function() {
-    HelloWorldController::lisaa_hevonen();
+    HevonenController::create();
   });
   
   $routes->get('/lisaa_kilpailu', function() {
@@ -61,7 +65,11 @@
   });
   
   $routes->get('/luo_kayttaja', function() {
-    HelloWorldController::luo_kayttaja();
+    KayttajaController::create();
+  });
+  
+  $routes->post('/kayttaja', function() {
+    KayttajaController::store();
   });
   
   $routes->get('/kirjaudu_sisaan', function() {
