@@ -55,10 +55,11 @@
   public static function findall($id){
     $query = DB::connection()->prepare('SELECT * FROM Kilpailu WHERE id = :id LIMIT 1');
     $query->execute(array('id' => $id));
-    $row = $query->fetch();
+    $rows = $query->fetchAll();
+    $kilpailut = array();
 
-    if($row){
-      $kilpailu = new Kilpailu(array(
+    foreach ($rows as $row) {
+      $kilpailut[] = new Kilpailu(array(
         'id' => $row['id'],
         'paivamaara' => $row['paivamaara'],
         'nimi' => $row['nimi'],
@@ -66,30 +67,27 @@
         'kilpailupaikka' => $row['kilpailupaikka']
       ));
 
-      return $kilpailu;
     }
+    return $kilpailut;
 
-    return null;
   }
   
   public static function findallosallistuminen($id){
     $query = DB::connection()->prepare('SELECT * FROM Kilpailu WHERE id = :id LIMIT 1');
     $query->execute(array('id' => $id));
-    $row = $query->fetch();
+    $rows = $query->fetchAll();
+    $kilpailut = array();
 
-    if($row){
-      $kilpailu = new Kilpailu(array(
+    foreach ($rows as $row) {
+      $kilpailut[] = new Kilpailu(array(
         'id' => $row['id'],
         'paivamaara' => $row['paivamaara'],
         'nimi' => $row['nimi'],
         'tasoluokitus' => $row['tasoluokitus'],
         'kilpailupaikka' => $row['kilpailupaikka']
       ));
-
-      return $kilpailu;
     }
-
-    return null;
+    return $kilpailut;
   }
   
    public function save() {

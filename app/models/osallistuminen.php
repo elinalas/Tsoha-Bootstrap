@@ -55,9 +55,10 @@
   public static function findallkilpailu($kilpailu){
     $query = DB::connection()->prepare('SELECT * FROM Osallistuminen WHERE kilpailu = :kilpailu');
     $query->execute(array('kilpailu' => $kilpailu));
-    $row = $query->fetch();
+    $rows = $query->fetchAll();
+    $osallistumiset = array();
 
-    if($row){
+    foreach ($rows as $row) {
       $osallistumiset[] = new Osallistuminen(array(
         'id' => $row['id'],
         'kilpailu' => $row['kilpailu'],
@@ -66,18 +67,19 @@
         'ratsastajan_jasennumero' => $row['ratsastajan_jasennumero']  
       ));
 
-      return $osallistumiset;
+
     }
 
-    return null;
+    return $osallistumiset;
   }
   
   public static function findallhevonen($hevonen){
     $query = DB::connection()->prepare('SELECT * FROM Osallistuminen WHERE hevonen = :hevonen');
     $query->execute(array('hevonen' => $hevonen));
-    $row = $query->fetch();
+    $rows = $query->fetchAll();
+    $osallistumiset = array();
 
-    if($row){
+    foreach ($rows as $row) {
       $osallistumiset[] = new Osallistuminen(array(
         'id' => $row['id'],
         'kilpailu' => $row['kilpailu'],
@@ -86,10 +88,10 @@
         'ratsastajan_jasennumero' => $row['ratsastajan_jasennumero']  
       ));
 
-      return $osallistumiset;
-    }
 
-    return null;
+    }
+    return $osallistumiset;
+
   }
   
   }

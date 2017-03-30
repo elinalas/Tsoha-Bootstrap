@@ -9,7 +9,7 @@ CREATE TABLE Kilpailu (
 CREATE TABLE Kayttaja (
  jasennumero bigint PRIMARY KEY NOT NULL,
  nimi varchar(150) NOT NULL,
- yllapitaja boolean DEFAULT FALSE
+ status boolean DEFAULT FALSE
 );
 
 CREATE TABLE Hevonen (

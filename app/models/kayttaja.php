@@ -23,7 +23,7 @@
       $kayttajat[] = new Kayttaja(array(
         'nimi' => $row['nimi'],
         'jasennumero' => $row['jasennumero'],
-        'status' => isset($row['status'])
+        'status' => $row['status']
       ));
     }
 
@@ -39,7 +39,7 @@
       $kayttaja = new Kayttaja(array(
         'nimi' => $row['nimi'],
         'jasennumero' => $row['jasennumero'],
-        'status' => isset($row['status'])
+        'status' => $row['status']
       ));
 
       return $kayttaja;

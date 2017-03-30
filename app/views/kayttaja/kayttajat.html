@@ -18,7 +18,11 @@
       <tr>
         <td><a href="{{base_path}}/kayttaja/{{kayttaja.jasennumero}}">{{kayttaja.nimi}}</a></td>
         <td>{{kayttaja.jasennumero}}</td>
-        <td><label class="label label-danger">Ylläpitäjä</label></td>
+        {% if kayttaja.status == true %}
+        <td><label class="label label-danger">ylläpitäjä</label></td>
+    {% else %}
+    <td><label class="label label-primary">omistaja</label></td>
+    {% endif %}
       </tr>
        {% endfor %}
     </tbody>

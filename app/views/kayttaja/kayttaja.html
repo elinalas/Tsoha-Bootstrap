@@ -35,8 +35,7 @@
     </thead>
 
     <tbody>
-        {% for yksi in osallistumiset %}
-        {% for osallistuminen in yksi%}
+        {% for osallistuminen in osallistumiset %}
         <!-- Listataan pelit tähän -->
         <tr>
             <td><a href="{{base_path}}/kilpailu/{{osallistuminen.kilpailu}}">{{osallistuminen.kilpailu}}</a></td>
@@ -50,7 +49,6 @@
             {% endif %}
             <th><a class="btn btn-default btn-sm" href="/kilpailujarjestelma/muokkaa_osallistuminen">Muokkaa</a></th>
         </tr>
-        {% endfor %}
         {% endfor %}
     </tbody>
 </table>

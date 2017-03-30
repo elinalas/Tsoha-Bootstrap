@@ -53,9 +53,10 @@ class Hevonen extends BaseModel {
     public static function findallkayttaja($kayttaja) {
         $query = DB::connection()->prepare('SELECT * FROM Hevonen WHERE kayttaja = :kayttaja');
         $query->execute(array('kayttaja' => $kayttaja));
-        $row = $query->fetch();
+        $rows = $query->fetchAll();
+        $hevoset = array();
 
-        if ($row) {
+        foreach ($rows as $row) {
             $hevoset[] = new Hevonen(array(
                 'nimi' => $row['nimi'],
                 'rekisterinumero' => $row['rekisterinumero'],
@@ -63,18 +64,20 @@ class Hevonen extends BaseModel {
                 'kokoluokka' => $row['kokoluokka']
             ));
 
-            return $hevoset;
+           
         }
+        return $hevoset;
 
-        return null;
+  
     }
     
     public static function findallosallistuminen($rekisterinumero) {
         $query = DB::connection()->prepare('SELECT * FROM Hevonen WHERE rekisterinumero = :rekisterinumero');
         $query->execute(array('rekisterinumero' => $rekisterinumero));
-        $row = $query->fetch();
+        $rows = $query->fetchAll();
+        $hevoset = array();
 
-        if ($row) {
+        foreach ($rows as $row) {
             $hevoset[] = new Hevonen(array(
                 'nimi' => $row['nimi'],
                 'rekisterinumero' => $row['rekisterinumero'],
@@ -82,10 +85,8 @@ class Hevonen extends BaseModel {
                 'kokoluokka' => $row['kokoluokka']
             ));
 
-            return $hevoset;
         }
-
-        return null;
+        return $hevoset;
     }
 
     
