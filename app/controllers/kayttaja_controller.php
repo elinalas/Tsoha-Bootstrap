@@ -1,49 +1,68 @@
 <?php
-require 'app/models/hevonen.php';
-require 'app/models/kayttaja.php';
-require 'app/models/osallistuminen.php';
-class KayttajaController extends BaseController{
-  public static function index(){
-    // Haetaan kaikki pelit tietokannasta
-    $kayttajat = Kayttaja::all();
-    // Renderöidään views/game kansiossa sijaitseva tiedosto index.html muuttujan $games datalla
-    View::make('kayttaja/kayttajat.html', array('kayttajat' => $kayttajat));
-  }
-  
-  public static function show($jasennumero){
-    // Haetaan kaikki pelit tietokannasta
-    $kayttaja = Kayttaja::find($jasennumero);
-    $hevoset = Hevonen::findallkayttaja($jasennumero);
-    $osallistumiset = array();
-    foreach($hevoset as $hevonen){
-        $osallistumiset += Osallistuminen::findallhevonen($hevonen->rekisterinumero);
+
+class KayttajaController extends BaseController {
+
+    public static function index() {
+
+        $kayttajat = Kayttaja::all();
+
+        View::make('kayttaja/kayttajat.html', array('kayttajat' => $kayttajat));
     }
-    
-    // Renderöidään views/game kansiossa sijaitseva tiedosto index.html muuttujan $games datalla
-    View::make('kayttaja/kayttaja.html', array('kayttaja' => $kayttaja, 'hevoset' => $hevoset, 'osallistumiset' => $osallistumiset));
-  }
-  
-  public static function create(){
-    // Haetaan kaikki pelit tietokannasta
-    // Renderöidään views/game kansiossa sijaitseva tiedosto index.html muuttujan $games datalla
-    View::make('kayttaja/luo_kayttaja.html');
-  }
-  
-  public static function store() {
-        // POST-pyynnön muuttujat sijaitsevat $_POST nimisessä assosiaatiolistassa
+
+    public static function show($jasennumero) {
+
+        $kayttaja = Kayttaja::find($jasennumero);
+        $hevoset = Hevonen::findallkayttaja($jasennumero);
+        $osallistumiset = array();
+        foreach ($hevoset as $hevonen) {
+            $osallistumiset += Osallistuminen::findallhevonen($hevonen->rekisterinumero);
+        }
+
+        View::make('kayttaja/kayttaja.html', array('kayttaja' => $kayttaja, 'hevoset' => $hevoset, 'osallistumiset' => $osallistumiset));
+    }
+
+    public static function create() {
+        //
+        View::make('kayttaja/luo_kayttaja.html');
+    }
+
+    public static function store() {
         $params = $_POST;
-        // Alustetaan uusi Game-luokan olion käyttäjän syöttämillä arvoilla
-        $kayttaja = new Kayttaja(array(
+        $attributes = array(
             'nimi' => $params['nimi'],
             'jasennumero' => $params['jasennumero'],
-            'status' => false            
-        ));
+            'salasana' => $params['salasana'],
+            'status' => false
+        );
 
-        // Kutsutaan alustamamme olion save metodia, joka tallentaa olion tietokantaan
-        $kayttaja->save();
 
-        // Ohjataan käyttäjä lisäyksen jälkeen pelin esittelysivulle
-        Redirect::to('/kayttaja/' . $kayttaja->jasennumero, array('message' => 'Käyttäjä luotu!'));
+        $kayttaja = new Kayttaja($attributes);
+        $errors = $kayttaja->errors();
+
+        if (count($errors) == 0) {
+            $kayttaja->save();
+            Redirect::to('/kayttaja/' . $kayttaja->jasennumero, array('message' => 'Käyttäjä luotu!'));
+        } else {
+            View::make('kayttaja/luo_kayttaja.html', array('errors' => $errors, 'attributes' => $attributes));
+        }
     }
-}
 
+    public static function kirjaudu_sisaan() {
+        View::make('kayttaja/kirjaudu_sisaan.html');
+    }
+
+    public static function handle_kirjaudu_sisaan() {
+        $params = $_POST;
+
+        $kayttaja = Kayttaja::authenticate($params['nimi'], $params['salasana']);
+
+        if (!$kayttaja) {
+            View::make('kayttaja/kirjaudu_sisaan.html', array('error' => 'Väärä nimi tai salasana!', 'nimi' => $params['nimi']));
+        } else {
+            $_SESSION['kayttaja'] = $kayttaja->jasennumero;
+
+            Redirect::to('/', array('message' => 'Tervetuloa takaisin ' . $kayttaja->nimi . '!'));
+        }
+    }
+
+}

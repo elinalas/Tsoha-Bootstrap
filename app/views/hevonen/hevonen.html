@@ -1,19 +1,27 @@
 {% extends "base.html" %}
 {% block content %}
-    {% if message %}
-    <div class="alert alert-success">
-      {{message}}
-    </div>
-    {% endif %}
-    <h1>{{hevonen.nimi}}</h1>
-    <!-- Painikkeet tähän -->
-    <p>
-      <button class="btn btn-danger">Poista hevonen</button> 
-    </p>
-    <!-- Tiedot tulee listana tähän -->
-    <ul>
-      <li><strong>Rekisterinumero: </strong> {{hevonen.rekisterinumero}}</li>
-      <li><strong>Omistaja: </strong> <a href="{{base_path}}/kayttaja/{{hevonen.kayttaja}}">{{kayttaja.nimi}}</a></li>
-      <li><strong>Kokoluokka: </strong>{{hevonen.kokoluokka}}</li>
-    </ul>
+{% if message %}
+<div class="alert alert-success">
+    {{message}}
+</div>
+{% endif %}
+<h1>{{hevonen.nimi}}</h1>
+<!-- Painikkeet tähän -->
+{% if user_logged_in %}
+{% if user_logged_in.jasennumero == hevonen.kayttaja %}
+<form method="post" action="{{base_path}}/hevonen/{{hevonen.rekisterinumero}}/destroy" style="display: inline-block;">
+    <button type="submit" class="btn btn-danger">Poista</button>
+</form>
+{% elseif user_logged_in.status == true %}
+<form method="post" action="{{base_path}}/hevonen/{{hevonen.rekisterinumero}}/destroy" style="display: inline-block;">
+    <button type="submit" class="btn btn-danger">Poista</button>
+</form>
+{% endif %}
+{% endif %}
+<!-- Tiedot tulee listana tähän -->
+<ul>
+    <li><strong>Rekisterinumero: </strong> {{hevonen.rekisterinumero}}</li>
+    <li><strong>Omistaja: </strong> <a href="{{base_path}}/kayttaja/{{hevonen.kayttaja}}">{{kayttaja.nimi}}</a></li>
+    <li><strong>Kokoluokka: </strong>{{hevonen.kokoluokka}}</li>
+</ul>
 {% endblock %}

@@ -5,6 +5,7 @@
     protected $validators;
 
     public function __construct($attributes = null){
+        
       // Käydään assosiaatiolistan avaimet läpi
       foreach($attributes as $attribute => $value){
         // Jos avaimen niminen attribuutti on olemassa...
@@ -18,11 +19,13 @@
     public function errors(){
       // Lisätään $errors muuttujaan kaikki virheilmoitukset taulukkona
       $errors = array();
-
       foreach($this->validators as $validator){
+          $validator_errors = $this->{$validator}();
+          $errors = array_merge($errors, $validator_errors);
+          
         // Kutsu validointimetodia tässä ja lisää sen palauttamat virheet errors-taulukkoon
       }
-
+      
       return $errors;
     }
 

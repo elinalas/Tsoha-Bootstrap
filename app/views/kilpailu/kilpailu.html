@@ -1,54 +1,61 @@
 {% extends "base.html" %}
 {% block content %}
 {% if message %}
-    <div class="alert alert-success">
-      {{message}}
-    </div>
-    {% endif %}
-  <h1>{{kilpailu.nimi}}</h1>
-  <!-- Painikkeet tähän -->
-  <p>
-    <button class="btn btn-danger">Poista</button> <a href="/kilpailujarjestelma/muokkaa_kilpailu" class="btn btn-default">Muokkaa</a>
-  </p>
-  <!-- Tiedot tulee listana tähän -->
-  <ul>
+<div class="alert alert-success">
+    {{message}}
+</div>
+{% endif %}
+<h1>{{kilpailu.nimi}}</h1>
+{% if user_logged_in %}
+{% if user_logged_in.status == true %}
+<form method="post" action="{{base_path}}/kilpailu/{{kilpailu.id}}/destroy" style="display: inline-block;">
+    <button class="btn btn-danger">Poista</button> 
+</form>
+<a href="/kilpailujarjestelma/{{kilpailu.id}}/muokkaa_kilpailu" class="btn btn-default">Muokkaa</a>
+{% endif %}
+{% endif %}
+<ul>
     <li><strong>Päivämäärä: </strong>{{kilpailu.paivamaara}}</li>
     <li><strong>Tasoluokitus: </strong>{{kilpailu.tasoluokka}}</li>
     <li><strong>Kilpailupaikka: </strong>{{kilpailu.kilpailupaikka}}</li>
-  </ul>
-  
-  <h2>Osallistumiset:</h2>
-  
-  <table class="table table-striped table-bordered">
+</ul>
+
+<h2>Osallistumiset:</h2>
+
+<table class="table table-striped table-bordered">
     <thead>
-      <tr>
-        <th>Hevonen</th>
-        <th>Ratsastaja</th>
-        <th>Ratsastajan jäsennro</th>
-        <th>Maksustatus</th>
-        <th></th>
-      </tr>
+        <tr>
+            <th>Hevonen</th>
+            <th>Ratsastaja</th>
+            <th>Ratsastajan jäsennro</th>
+            <th>Maksustatus</th>
+            <th></th>
+        </tr>
     </thead>
 
     <tbody>
-      {% for osallistuminen in osallistumiset %} 
-      {% for hevonen in hevoset %} 
-      <!-- Listataan pelit tähän -->
-      <tr>
-        <td><a href="{{base_path}}/hevonen/{{osallistuminen.hevonen}}">{{hevonen.nimi}}</a></td>
-        <td>{{osallistuminen.ratsastaja}}</td>
-        <td>{{osallistuminen.ratsastajan_jasennumero}}</td>
-        {% if status == false %}
-        <td><label class="label label-danger">Ei maksettu</label></td>
-        {%else%}
-        <td><label class="label label-primary">Maksettu</label></td>
-        {%endif%}
-        <th><a class="btn btn-default btn-sm" href="/kilpailujarjestelma/muokkaa_osallistuminen">Muokkaa</a></th>
-      </tr>
-      {% endfor %}
-      {% endfor %}
+        {% for osallistuminen in osallistumiset %} 
+        {% for hevonen in hevoset %} 
+        <!-- Listataan pelit tähän -->
+        <tr>
+            <td><a href="{{base_path}}/hevonen/{{osallistuminen.hevonen}}">{{hevonen.nimi}}</a></td>
+            <td>{{osallistuminen.ratsastaja}}</td>
+            <td>{{osallistuminen.ratsastajan_jasennumero}}</td>
+            {% if status == false %}
+            <td><label class="label label-danger">Ei maksettu</label></td>
+            {%else%}
+            <td><label class="label label-primary">Maksettu</label></td>
+            {%endif%}
+            {%if user_logged_in%} 
+            {% if user_logged_in.status == true %}
+            <th><a class="btn btn-default btn-sm" href="/kilpailujarjestelma/muokkaa_osallistuminen">Muokkaa</a></th>
+            {% endif %}
+            {% endif %}
+        </tr>
+        {% endfor %}
+        {% endfor %}
     </tbody>
-  </table>
-  
-  
+</table>
+
+
 {% endblock %}

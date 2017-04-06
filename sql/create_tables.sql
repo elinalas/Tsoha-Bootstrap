@@ -9,6 +9,7 @@ CREATE TABLE Kilpailu (
 CREATE TABLE Kayttaja (
  jasennumero bigint PRIMARY KEY NOT NULL,
  nimi varchar(150) NOT NULL,
+ salasana varchar(30) NOT NULL,
  status boolean DEFAULT FALSE
 );
 

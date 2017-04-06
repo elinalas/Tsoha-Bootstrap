@@ -20,13 +20,7 @@
     OsallistuminenController::index();
   });
   
-  $routes->get('/muokkaa_osallistuminen', function() {
-    HelloWorldController::muokkaa_osallistuminen();
-  });
   
-  $routes->get('/muokkaa_kilpailu', function() {
-    HelloWorldController::muokkaa_kilpailu();
-  });
   
   $routes->get('/kayttaja/:jasennumero', function($jasennumero) {
     KayttajaController::show($jasennumero);
@@ -56,13 +50,29 @@
     HevonenController::store();
   });
   
+  
+  $routes->post('/hevonen/:rekisterinumero/destroy', function($rekisterinumero) {
+    HevonenController::destroy($rekisterinumero);
+  });
+  
+ $routes->get('/kilpailu/:id/muokkaa_kilpailu', function($id){
+  // Pelin muokkauslomakkeen esittäminen
+  KilpailuController::edit($id);
+});
+$routes->post('/kilpailu/:id/muokkaa_kilpailu', function($id){
+  // Pelin muokkaaminen
+  KilpailuController::update($id);
+});
+
+  
+  $routes->post('/kilpailu/:id/destroy', function($id) {
+    KilpailuController::destroy($id);
+  });
+  
   $routes->get('/lisaa_hevonen', function() {
     HevonenController::create();
   });
   
-  $routes->get('/lisaa_kilpailu', function() {
-    HelloWorldController::lisaa_kilpailu();
-  });
   
   $routes->get('/luo_kayttaja', function() {
     KayttajaController::create();
@@ -73,7 +83,18 @@
   });
   
   $routes->get('/kirjaudu_sisaan', function() {
-    HelloWorldController::kirjaudu_sisaan();
+    KayttajaController::kirjaudu_sisaan();
+  });
+  
+  $routes->post('/kirjaudu_sisaan', function() {
+    KayttajaController::handle_kirjaudu_sisaan();
+  });
+  
+  $routes->post('/kilpailu', function() {
+    KilpailuController::store();
   });
  
+   $routes->get('/lisaa_kilpailu', function() {
+    KilpailuController::create();
+  });
  

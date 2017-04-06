@@ -6,17 +6,17 @@
   Voit selata kilpailuja ja osallistumisia kirjautumatta sisään.<br>
 
   <!-- Kaikki lomakkeen elementit form-tagin sisään -->
-  <form>
+  <form method="post" action="{{base_path}}/kirjaudu_sisaan">
     <!-- Tekstikenttä käyttäjätunnukselle -->
     <div class="form-group">
-      <label>Käyttäjätunnus</label>
-      <input type="text" class="form-control">
+      <label>Nimi</label>
+      <input type="text" class="form-control" name="nimi" value="{{nimi}}">
     </div>
 
     <!-- Salasanakenttä salasanalle -->
     <div class="form-group">
       <label>Salasana</label>
-      <input type="password" class="form-control">
+      <input type="password" class="form-control" name="salasana">
     </div>
 
     <button type="submit" class="btn btn-primary">Kirjaudu sisään</button>

@@ -42,11 +42,21 @@
             <li><a href="{{base_path}}">Etusivu</a></li>
             <li><a href="/kilpailujarjestelma/kilpailut">Kilpailut</a></li>
             <li><a href="/kilpailujarjestelma/osallistumiset">Osallistumiset</a></li>
+            {% if user_logged_in %}
+            {% if user_logged_in.status %}
             <li><a href="/kilpailujarjestelma/kayttajat">Käyttäjät</a></li>
+            {% endif %}
             <li><a href="/kilpailujarjestelma/hevoset">Hevoset</a></li>
+            {% endif %}
             <li><a>|</a></li>
+            {% if user_logged_in %}
+            <li><a href="/kilpailujarjestelma/kayttaja/{{user_logged_in.jasennumero}}">{{user_logged_in.nimi}}</a></li>
+            <li><a href="/kilpailujarjestelma/kirjaudu_ulos">Kirjaudu ulos</a></li>
+            {% else %}
             <li><a href="/kilpailujarjestelma/kirjaudu_sisaan">Kirjaudu sisään</a></li>
             <li><a href="/kilpailujarjestelma/luo_kayttaja">Luo käyttäjä</a></li>
+            {% endif %}
+            
           </ul>
         </div>
       </div>

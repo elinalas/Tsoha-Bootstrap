@@ -2,9 +2,12 @@
 {% block content %}
   <h1>Osallistuminen</h1>
   <!-- Painikkeet tähän -->
-  <p>
+  {% if user_logged_in %}
+<p>
     <button class="btn btn-danger">Poista</button> <a href="#" class="btn btn-default">Muokkaa</a>
   </p>
+{% endif %}
+  
   <!-- Tiedot tulee listana tähän -->
   <ul>
     <li><strong>Kilpailu: </strong> <a href="/kilpailujarjestelma/kilpailu">Helppo C</a></li>
