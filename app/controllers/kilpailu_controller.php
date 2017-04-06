@@ -49,7 +49,7 @@ class KilpailuController extends BaseController {
 
     public static function edit($id) {
         $kilpailu = Kilpailu::find($id);
-        View::make('kilpailu/muokkaa_kilpailu.html', array('attributes' => $kilpailu));
+        View::make('kilpailu/muokkaa_kilpailu.html', array( 'attributes' => array('kilpailu' => $kilpailu)));
     }
 
     public static function update($id) {

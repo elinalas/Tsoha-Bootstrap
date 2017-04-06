@@ -7,9 +7,13 @@
 {% endif %}
 <h1>{{kayttaja.nimi}}</h1>
 <!-- Painikkeet tähän -->
-<p>
-    <button class="btn btn-danger">Poista</button>
-</p>
+{% if user_logged_in %}
+{% if user_logged_in.status == true %}
+<form method="post" action="{{base_path}}/kayttaja/{{kayttaja.jasennumero}}/destroy" style="display: inline-block;">
+  <button type="submit" class="btn btn-danger">Poista</button>
+</form>
+{% endif %}
+{% endif %}
 <!-- Tiedot tulee listana tähän -->
 <ul>    
     <li><strong>Jäsennumero </strong> {{kayttaja.jasennumero}}</li>

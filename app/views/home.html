@@ -5,9 +5,11 @@
     <h1>Tervetuloa kilpailujärjestelmään</h1>
   </div>
 
-
+{% if user_logged_in %}
+Olet kirjautunut sisään. Osallistu kilpailuihin, muokkaa osallistumistasi tai lisää hevosia.<br>
+{% else %}
 <h3><a href="/kilpailujarjestelma/kirjaudu_sisaan">Kirjaudu sisään</a> tai <a href="/kilpailujarjestelma/luo_kayttaja">luo käyttäjä</a>.</h3>
   Voit selata kilpailuja ja osallistumisia kirjautumatta sisään.<br>
-
+{%endif%}
 
 {% endblock %}
