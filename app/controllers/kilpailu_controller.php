@@ -23,7 +23,7 @@ class KilpailuController extends BaseController {
 
     public static function create() {
         self::check_logged_in();
-        if ($user_logged_in.status == FALSE) {
+        if (self::is_admin()) {
             Redirect::to('/kirjaudu_sisaan', array('message' => 'Vain ylläpitäjä voi luoda kilpailuja!'));
         }
         View::make('kilpailu/lisaa_kilpailu.html');
@@ -31,7 +31,7 @@ class KilpailuController extends BaseController {
 
     public static function store() {
         self::check_logged_in();
-        if ($user_logged_in.status == FALSE) {
+        if (self::is_admin()) {
             Redirect::to('/kirjaudu_sisaan', array('message' => 'Vain ylläpitäjä voi luoda kilpailuja!'));
         }
         $params = $_POST;
@@ -56,7 +56,7 @@ class KilpailuController extends BaseController {
 
     public static function edit($id) {
         self::check_logged_in();
-        if ($user_logged_in.status == FALSE) {
+        if (self::is_admin()) {
             Redirect::to('/kirjaudu_sisaan', array('message' => 'Vain ylläpitäjä voi muokata kilpailuja!'));
         }
         $kilpailu = Kilpailu::find($id);
@@ -65,7 +65,7 @@ class KilpailuController extends BaseController {
 
     public static function update($id) {
         self::check_logged_in();
-        if ($user_logged_in.status == FALSE) {
+        if (self::is_admin()) {
             Redirect::to('/kirjaudu_sisaan', array('message' => 'Vain ylläpitäjä voi muokata kilpailuja!'));
         }
         $params = $_POST;
@@ -92,7 +92,7 @@ class KilpailuController extends BaseController {
 
     public static function destroy($id) {
         self::check_logged_in();
-        if ($user_logged_in.status == FALSE) {
+        if (self::is_admin()) {
             Redirect::to('/kirjaudu_sisaan', array('message' => 'Vain ylläpitäjä voi poistaa kilpailuja!'));
         }
         $kilpailu = new Kilpailu(array('id' => $id));

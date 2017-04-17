@@ -42,5 +42,6 @@ class OsallistuminenController extends BaseController {
 
         Redirect::to('/osallistuminen/' . $osallistuminen->id, array('message' => 'Osallistuminen lisätty!'));
     }
-
+    
+    
 }

@@ -4,7 +4,7 @@ class KayttajaController extends BaseController {
 
     public static function index() {
         self::check_logged_in();
-        if ($user_logged_in.status == FALSE) {
+        if (self::is_admin()) {
             Redirect::to('/kirjaudu_sisaan', array('message' => 'Vain ylläpitäjä voi nähdä kaikki käyttäjät!'));
         }
         $kayttajat = Kayttaja::all();
@@ -69,7 +69,7 @@ class KayttajaController extends BaseController {
     }
     
     public static function logout(){
-    $_SESSION['user'] = null;
+    $_SESSION['kayttaja'] =  session_destroy();
     Redirect::to('/kirjaudu_sisaan', array('message' => 'Olet kirjautunut ulos!'));
   }
 

@@ -2,7 +2,7 @@
 class HevonenController extends BaseController{
   public static function index(){
     self::check_logged_in();
-    if ($user_logged_in.status == FALSE) {
+    if (self::is_admin()) {
        Redirect::to('/kirjaudu_sisaan', array('message' => 'Vain ylläpitäjä voi nähdä kaikki hevoset!'));
     }
     $hepat = Hevonen::all();
@@ -51,7 +51,7 @@ class HevonenController extends BaseController{
     public static function edit($id){
     self::check_logged_in();
     $hevonen = Hevonen::find($id);
-    if ($user_logged_in.jasennumero != hevonen.omistaja) {
+    if (self::get_user_logged_in()->jasennumero != $hevonen->omistaja) {
        Redirect::to('/kirjaudu_sisaan', array('message' => 'Vain omistaja voi muokata hevostaan!'));
     }
    
@@ -63,7 +63,7 @@ class HevonenController extends BaseController{
     self::check_logged_in();
     
     $hevonen = new Hevonen(array('rekisterinumero' => $rekisterinumero));
-    if ($user_logged_in.jasennumero != hevonen.omistaja) {
+    if (self::get_user_logged_in()->jasennumero != $hevonen->omistaja) {
        Redirect::to('/kirjaudu_sisaan', array('message' => 'Vain omistaja voi poistaa hevosen!'));
     }
    

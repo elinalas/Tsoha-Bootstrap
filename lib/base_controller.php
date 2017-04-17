@@ -22,6 +22,11 @@ class BaseController {
         }
     }
     
+    public static function is_admin() {
+        $user = self::get_user_logged_in();
+        return $user && $user['status'];
+    }
+    
     
 
 }

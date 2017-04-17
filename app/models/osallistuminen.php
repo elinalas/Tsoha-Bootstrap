@@ -94,4 +94,13 @@
 
   }
   
+  public static function merkitse_maksetuksi($id) {
+        self::check_logged_in();
+        if ($user_logged_in.status == false) {
+            Redirect::to('/kirjaudu_sisaan', array('message' => 'Sinun on oltava ylläpitäjä voidaksesi merkitä maksuja!'));
+        }
+        $osallistuminen = Osallistuminen::find($id);
+    }
+
+  
   }
