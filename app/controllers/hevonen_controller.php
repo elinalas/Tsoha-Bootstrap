@@ -1,28 +1,29 @@
 <?php
 class HevonenController extends BaseController{
   public static function index(){
-    
+    self::check_logged_in();
+    if ($user_logged_in.status == FALSE) {
+       Redirect::to('/kirjaudu_sisaan', array('message' => 'Vain ylläpitäjä voi nähdä kaikki hevoset!'));
+    }
     $hepat = Hevonen::all();
     
     View::make('hevonen/hevoset.html', array('hepat' => $hepat));
   }
   
-  public static function show($rekisterinumero){
-   
+  public static function show($rekisterinumero){   
     $hevonen = Hevonen::find($rekisterinumero);
     $kayttaja = Kayttaja::find($hevonen->kayttaja);
     
-   
     View::make('hevonen/hevonen.html', array('hevonen' => $hevonen, 'kayttaja' => $kayttaja));
   }
   
   public static function create(){
-    
+    self::check_logged_in();
     View::make('hevonen/lisaa_hevonen.html');
   }
   
   public static function store() {
-        
+        self::check_logged_in();
         $params = $_POST;
        
         $attributes = array(
@@ -48,13 +49,24 @@ class HevonenController extends BaseController{
     }
     
     public static function edit($id){
+    self::check_logged_in();
     $hevonen = Hevonen::find($id);
+    if ($user_logged_in.jasennumero != hevonen.omistaja) {
+       Redirect::to('/kirjaudu_sisaan', array('message' => 'Vain omistaja voi muokata hevostaan!'));
+    }
+   
     View::make('hevonen/muokkaa_hevonen.html', array('attributes' => $hevonen));
   }
   
   
   public static function destroy($rekisterinumero){
+    self::check_logged_in();
+    
     $hevonen = new Hevonen(array('rekisterinumero' => $rekisterinumero));
+    if ($user_logged_in.jasennumero != hevonen.omistaja) {
+       Redirect::to('/kirjaudu_sisaan', array('message' => 'Vain omistaja voi poistaa hevosen!'));
+    }
+   
     $hevonen->destroy();
 
     Redirect::to('/hevoset', array('message' => 'Hevonen on poistettu onnistuneesti!'));

@@ -3,7 +3,10 @@
 class KayttajaController extends BaseController {
 
     public static function index() {
-
+        self::check_logged_in();
+        if ($user_logged_in.status == FALSE) {
+            Redirect::to('/kirjaudu_sisaan', array('message' => 'Vain ylläpitäjä voi nähdä kaikki käyttäjät!'));
+        }
         $kayttajat = Kayttaja::all();
 
         View::make('kayttaja/kayttajat.html', array('kayttajat' => $kayttajat));
@@ -64,5 +67,10 @@ class KayttajaController extends BaseController {
             Redirect::to('/', array('message' => 'Tervetuloa takaisin ' . $kayttaja->nimi . '!'));
         }
     }
+    
+    public static function logout(){
+    $_SESSION['user'] = null;
+    Redirect::to('/kirjaudu_sisaan', array('message' => 'Olet kirjautunut ulos!'));
+  }
 
 }

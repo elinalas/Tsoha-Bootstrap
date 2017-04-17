@@ -97,4 +97,8 @@ $routes->post('/kilpailu/:id/muokkaa_kilpailu', function($id){
    $routes->get('/lisaa_kilpailu', function() {
     KilpailuController::create();
   });
+  
+  $routes->post('/kirjaudu_ulos', function(){
+  KayttajaController::logout();
+});
  

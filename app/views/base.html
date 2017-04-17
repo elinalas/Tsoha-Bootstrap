@@ -51,10 +51,16 @@
             <li><a>|</a></li>
             {% if user_logged_in %}
             <li><a href="/kilpailujarjestelma/kayttaja/{{user_logged_in.jasennumero}}">{{user_logged_in.nimi}}</a></li>
-            <li><a href="/kilpailujarjestelma/kirjaudu_ulos">Kirjaudu ulos</a></li>
+            <li><form class="navbar-form navbar-right" method="post" action="/kilpailujarjestelma/kirjaudu_ulos">
+          <button type="submit" class="btn btn-default">Kirjaudu ulos</button>
+        </form></li>
             {% else %}
-            <li><a href="/kilpailujarjestelma/kirjaudu_sisaan">Kirjaudu sisään</a></li>
-            <li><a href="/kilpailujarjestelma/luo_kayttaja">Luo käyttäjä</a></li>
+            <li><form class="navbar-form navbar-right" method="get" action="/kilpailujarjestelma/kirjaudu_sisaan">
+          <button type="submit" class="btn btn-default">Kirjaudu sisään</button>
+        </form></li>
+            <li><form class="navbar-form navbar-right" method="get" action="/kilpailujarjestelma/luo_kayttaja">
+          <button type="submit" class="btn btn-default">Luo käyttäjä</button>
+        </form>></li>
             {% endif %}
             
           </ul>
