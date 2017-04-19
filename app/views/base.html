@@ -45,8 +45,10 @@
                         {% if user_logged_in %}
                         {% if user_logged_in.status %}
                         <li><a href="/kilpailujarjestelma/kayttajat">Käyttäjät</a></li>
-                        {% endif %}
                         <li><a href="/kilpailujarjestelma/hevoset">Hevoset</a></li>
+                        {% else %}
+                        <li><a href="/kilpailujarjestelma/lisaa_hevonen">Lisää hevonen</a></li>
+                        {% endif %}
                         {% endif %}
                         <li><a>|</a></li>
                         {% if user_logged_in %}

@@ -69,9 +69,6 @@ class OsallistuminenController extends BaseController {
 
     public static function edit($id) {
         !self::check_logged_in();
-        if (!self::is_admin()) {
-            Redirect::to('/kirjaudu_sisaan', array('message' => 'Vain ylläpitäjä voi muokata kilpailuja!'));
-        }
         $osallistuminen = Osallistuminen::find($id);
         $hevonen = Hevonen::find($osallistuminen->hevonen);
         $kilpailu = Kilpailu::find($osallistuminen->kilpailu);
@@ -80,9 +77,6 @@ class OsallistuminenController extends BaseController {
 
     public static function update($id) {
         !self::check_logged_in();
-        if (!self::is_admin()) {
-            Redirect::to('/kirjaudu_sisaan', array('message' => 'Vain ylläpitäjä voi muokata kilpailuja!'));
-        }
         $params = $_POST;
 
         $attributes = new Osallistuminen(array(
@@ -107,9 +101,6 @@ class OsallistuminenController extends BaseController {
 
     public static function destroy($id) {
         !self::check_logged_in();
-        if (!self::is_admin()) {
-            Redirect::to('/kirjaudu_sisaan', array('message' => 'Vain ylläpitäjä voi poistaa kilpailuja!'));
-        }
         $osallistuminen = new Osallistuminen(array('id' => $id));
         $osallistuminen->destroy();
 

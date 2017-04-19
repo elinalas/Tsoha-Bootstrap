@@ -64,6 +64,19 @@ $routes->post('/kilpailu/:id/muokkaa_kilpailu', function($id) {
     KilpailuController::update($id);
 });
 
+$routes->get('/osallistuminen/:id/muokkaa_osallistuminen', function($id) {
+    // Pelin muokkauslomakkeen esittäminen
+    OsallistuminenController::edit($id);
+});
+$routes->post('/osallistuminen/:id/muokkaa_osallistuminen', function($id) {
+    // Pelin muokkaaminen
+    OsallistuminenController::update($id);
+});
+
+$routes->post('/osalistuminen/:id/destroy', function($id) {
+    OsallistuminenController::destroy($id);
+});
+
 
 $routes->post('/kilpailu/:id/destroy', function($id) {
     KilpailuController::destroy($id);

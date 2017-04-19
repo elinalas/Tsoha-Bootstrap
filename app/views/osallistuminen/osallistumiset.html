@@ -57,7 +57,10 @@
                 {% if user_logged_in %}
                 {% for hevonen in kayttajanhevoset %}
                 {% if osallistuminen.hevonen == hevonen.rekisterinumero %}
-                <button class="btn btn-primary" href="/kilpailujarjestelma/osallistuminen/muokkaa_osallistuminen">Muokkaa osallistumista</button>
+                <form method="get" action="/kilpailujarjestelma/osallistuminen/{{osallistuminen.id}}/muokkaa_osallistuminen">
+                                <button type="submit" class="btn btn-primary">Muokkaa osallistumista</button>
+                </form>
+                
         {% endif %}
         {% endfor %}
         {% endif %}

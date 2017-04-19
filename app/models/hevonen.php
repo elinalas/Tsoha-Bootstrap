@@ -141,8 +141,8 @@ class Hevonen extends BaseModel {
     
     public function validate_kokoluokka() {
         $errors = array();
-        if ($this->kokoluokka != 'Hevonen' || $this->kokoluokka != 'Poni') {
-            $errors[] = 'Luomasi hevosen kokoluokan tulee olla hevonen tai poni. Valitse oikea kokoluokka.';
+        if ($this->kokoluokka != 'Hevonen' && $this->kokoluokka != 'Poni') {
+            $errors[] = 'Luomasi hevosen kokoluokan tulee olla: Hevonen tai Poni. Valitse oikea kokoluokka.';
         }
         return $errors;
     }
