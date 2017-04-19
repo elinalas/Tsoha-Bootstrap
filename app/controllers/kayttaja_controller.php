@@ -3,8 +3,8 @@
 class KayttajaController extends BaseController {
 
     public static function index() {
-        self::check_logged_in();
-        if (self::is_admin()) {
+        !self::check_logged_in();
+        if (!self::is_admin()) {
             Redirect::to('/kirjaudu_sisaan', array('message' => 'Vain ylläpitäjä voi nähdä kaikki käyttäjät!'));
         }
         $kayttajat = Kayttaja::all();

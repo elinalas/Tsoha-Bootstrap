@@ -69,21 +69,21 @@ class Hevonen extends BaseModel {
         return $hevoset;
     }
 
-    public static function findallosallistuminen($rekisterinumero) {
+    public static function findosallistuminen($rekisterinumero) {
         $query = DB::connection()->prepare('SELECT * FROM Hevonen WHERE rekisterinumero = :rekisterinumero');
         $query->execute(array('rekisterinumero' => $rekisterinumero));
         $rows = $query->fetchAll();
-        $hevoset = array();
+        $hevonen = array();
 
         foreach ($rows as $row) {
-            $hevoset[] = new Hevonen(array(
+            $hevonen = new Hevonen(array(
                 'nimi' => $row['nimi'],
                 'rekisterinumero' => $row['rekisterinumero'],
                 'kayttaja' => $row['kayttaja'],
                 'kokoluokka' => $row['kokoluokka']
             ));
         }
-        return $hevoset;
+        return $hevonen;
     }
 
     public function save() {

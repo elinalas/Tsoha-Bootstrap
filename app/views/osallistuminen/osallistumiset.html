@@ -14,24 +14,56 @@
             <th>Ratsastaja</th>
             <th>Ratsastajan jäsennro</th>
             <th>Maksustatus</th>
-            <th></th>
+            {% if user_logged_in%}       
+            <th>Toiminnot</th>
+            {% endif %}
+
+
         </tr>
     </thead>
 
     <tbody>
         {% for osallistuminen in osallistumiset %}
         <tr>
-            <td><a href="/kilpailujarjestelma/kilpailu/{{osallistuminen.kilpailu}}">{{osallistuminen.kilpailu}}</a></td>
-            <td><a href="/kilpailujarjestelma/hevonen/{{osallistuminen.hevonen}}">{{osallistuminen.hevonen}}</a></td>
+            <td>
+                {% for kilpailu in kilpailut %}
+                {% if osallistuminen.kilpailu == kilpailu.id %}
+                <a href="/kilpailujarjestelma/kilpailu/{{kilpailu.id}}">{{kilpailu.nimi}}</a>
+                {% endif %}
+                {% endfor %}
+            </td>
+            <td>
+                {% for hevonen in hevoset %}
+                {% if osallistuminen.hevonen == hevonen.rekisterinumero %}
+                <a href="/kilpailujarjestelma/hevonen/{{hevonen.rekisterinumero}}">{{hevonen.nimi}}</a>
+                {% endif %}
+                {% endfor %}
+            </td>
             <td>{{osallistuminen.ratsastaja}}</td>
             <td>{{osallistuminen.ratsastajan_jasennumero}}</td>
-            <td><label class="label label-danger">Ei maksettu</label></td>
-            {% if user_logged_in %}
-            {% if user_logged_in.status == true %}
-    <a class="btn btn-default btn-sm" href="/kilpailujarjestelma/merkitse_maksetuksi">Merkitse maksetuksi</a></td></tr>
-{% endif %}
-{% endif %}
-{% endfor %}
-</tbody>
+            <td>
+                {% if osallistuminen.maksettu %}
+                {{osallstuminen.maksettu}}<label class="label label-success">Maksettu</label>
+                {% else %}
+                {{osallstuminen.maksettu}}<label class="label label-danger">Ei maksettu</label>
+                {% endif %}
+            </td>
+            <td>
+                {% if user_logged_in and user_logged_in.status %}
+                <form style="display: inline-block" method="post" action="{{base_path}}/osallistuminen/{{osallistuminen.id}}/merkitse_maksetuksi">
+                    <button type="submit" class="btn btn-primary">Merkitse maksetuksi</button>
+                </form>
+                {% endif %}
+                {% if user_logged_in %}
+                {% for hevonen in kayttajanhevoset %}
+                {% if osallistuminen.hevonen == hevonen.rekisterinumero %}
+                <button class="btn btn-primary" href="/kilpailujarjestelma/osallistuminen/muokkaa_osallistuminen">Muokkaa osallistumista</button>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        </td></tr>
+        {% endfor %}
+        
+    </tbody>
 </table>
 {% endblock %}

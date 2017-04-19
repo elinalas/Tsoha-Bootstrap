@@ -1,8 +1,8 @@
 <?php
 class HevonenController extends BaseController{
   public static function index(){
-    self::check_logged_in();
-    if (self::is_admin()) {
+    !self::check_logged_in();
+    if (!self::is_admin()) {
        Redirect::to('/kirjaudu_sisaan', array('message' => 'Vain ylläpitäjä voi nähdä kaikki hevoset!'));
     }
     $hepat = Hevonen::all();
@@ -18,12 +18,12 @@ class HevonenController extends BaseController{
   }
   
   public static function create(){
-    self::check_logged_in();
+    !self::check_logged_in();
     View::make('hevonen/lisaa_hevonen.html');
   }
   
   public static function store() {
-        self::check_logged_in();
+        !self::check_logged_in();
         $params = $_POST;
        
         $attributes = array(
@@ -49,7 +49,7 @@ class HevonenController extends BaseController{
     }
     
     public static function edit($id){
-    self::check_logged_in();
+    !self::check_logged_in();
     $hevonen = Hevonen::find($id);
     if (self::get_user_logged_in()->jasennumero != $hevonen->omistaja) {
        Redirect::to('/kirjaudu_sisaan', array('message' => 'Vain omistaja voi muokata hevostaan!'));

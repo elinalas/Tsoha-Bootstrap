@@ -71,14 +71,14 @@ class Kilpailu extends BaseModel {
         return $kilpailut;
     }
 
-    public static function findallosallistuminen($id) {
+    public static function findosallistuminen($id) {
         $query = DB::connection()->prepare('SELECT * FROM Kilpailu WHERE id = :id LIMIT 1');
         $query->execute(array('id' => $id));
         $rows = $query->fetchAll();
-        $kilpailut = array();
+        $kilpailu = array();
 
         foreach ($rows as $row) {
-            $kilpailut[] = new Kilpailu(array(
+            $kilpailu = new Kilpailu(array(
                 'id' => $row['id'],
                 'paivamaara' => $row['paivamaara'],
                 'nimi' => $row['nimi'],
@@ -86,7 +86,7 @@ class Kilpailu extends BaseModel {
                 'kilpailupaikka' => $row['kilpailupaikka']
             ));
         }
-        return $kilpailut;
+        return $kilpailu;
     }
 
     public function save() {

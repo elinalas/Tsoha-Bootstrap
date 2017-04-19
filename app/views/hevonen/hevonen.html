@@ -1,10 +1,5 @@
 {% extends "base.html" %}
 {% block content %}
-{% if message %}
-<div class="alert alert-success">
-    {{message}}
-</div>
-{% endif %}
 <h1>{{hevonen.nimi}}</h1>
 <!-- Painikkeet tähän -->
 {% if user_logged_in %}
