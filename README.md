@@ -1,8 +1,7 @@
 # Kilpailujärjestelmä
 
 * [Linkki sovellukseeni](https://elinalas.users.cs.helsinki.fi/kilpailujarjestelma)
-* [Kilpailut](https://elinalas.users.cs.helsinki.fi/kilpailujarjestelma/kilpailut)
-Huomaathan, että uusia hevosia voi lisätä vain valmiilla käyttäjien rekisterinumeroilla! OSALLISTUMISSIVU on keskeneräinen. Malliluokka nyt kilpailut, mutta myös hevosella ja käyttäjällä toteutettu muu paitsi muokkaus.
+Kaikissa toimii listaus- ja esittelysivut. Huomaathan, että uusia hevosia voi lisätä vain valmiilla käyttäjien rekisterinumeroilla! Tämä tullaan myöhemmin muokkaamaan erilaiseksi. 
 Ylläpitäjän tunnukset: Elina Lassila (salasana: Elina Lassila)
 Tavallisen käyttäjän tunnukset: Hauska Hessu (salasana: Hauska Hessu)
 
