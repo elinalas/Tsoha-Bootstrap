@@ -34,14 +34,19 @@
     </thead>
 
     <tbody>
+
         {% for osallistuminen in osallistumiset %} 
-        {% for hevonen in hevoset %} 
-        <!-- Listataan pelit tähän -->
         <tr>
-            <td><a href="{{base_path}}/hevonen/{{osallistuminen.hevonen}}">{{hevonen.nimi}}</a></td>
+            <td>
+                {% for hevonen in hevoset %} 
+                {% if osallistuminen.hevonen == hevonen.rekisterinumero %}
+                <a href="{{base_path}}/hevonen/{{osallistuminen.hevonen}}">{{hevonen.nimi}}</a>
+                {% endif %}
+                {% endfor %}
+            </td>
             <td>{{osallistuminen.ratsastaja}}</td>
             <td>{{osallistuminen.ratsastajan_jasennumero}}</td>
-            {% if status == false %}
+            {% if osallistuminen.maksettu == false %}
             <td><label class="label label-danger">Ei maksettu</label></td>
             {%else%}
             <td><label class="label label-primary">Maksettu</label></td>
@@ -51,9 +56,9 @@
             <th><a class="btn btn-default btn-sm" href="/kilpailujarjestelma/muokkaa_osallistuminen">Muokkaa</a></th>
             {% endif %}
             {% endif %}
-        </tr>
+        </tr>      
         {% endfor %}
-        {% endfor %}
+
     </tbody>
 </table>
 

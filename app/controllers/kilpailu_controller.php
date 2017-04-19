@@ -15,7 +15,8 @@ class KilpailuController extends BaseController {
         $osallistumiset = Osallistuminen::findallkilpailu($kilpailu->id);
         $hevoset = array();
         foreach ($osallistumiset as $osallistuminen) {
-            $hevoset = Hevonen::findosallistuminen($osallistuminen->hevonen);
+            $hevonen = Hevonen::findosallistuminen($osallistuminen->hevonen);
+            $hevoset[$hevonen->rekisterinumero] = $hevonen;
         }
 
         View::make('kilpailu/kilpailu.html', array('kilpailu' => $kilpailu, 'osallistumiset' => $osallistumiset, 'hevoset' => $hevoset));
