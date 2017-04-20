@@ -137,13 +137,13 @@ class Kilpailu extends BaseModel {
 
     public function validate_tasoluokitus() {
         $errors = array();
-        if ($this->nimi == '' || $this->nimi == null) {
+        if ($this->tasoluokitus == '' || $this->tasoluokitus == null) {
             $errors[] = 'Tasoluokitus ei saa olla tyhjä!';
         }
-        if (strlen($this->nimi) < 6) {
-            $errors[] = 'Tasoluokitus ei kelpaa. Tasoluokitus vähintään 6 merkkiä, esim. Taso 1.';
+        if (strlen($this->tasoluokitus) < 6) {
+            $errors[] = 'Tasoluokitus ei kelpaa. Tasoluokitus vähintään 6 merkkiä, esim. 1. taso';
         }
-        if (strlen($this->nimi) > 10) {
+        if (strlen($this->tasoluokitus) > 10) {
             $errors[] = 'Tasoluokitus ei kelpaa. Tasoluokitus enintään 10 merkkiä. Voit merkitä maksimissaan: Harjoitus';
         }
         return $errors;
@@ -151,10 +151,10 @@ class Kilpailu extends BaseModel {
 
     public function validate_kilpailupaikka() {
         $errors = array();
-        if ($this->nimi == '' || $this->nimi == null) {
+        if ($this->kilpailupaikka == '' || $this->kilpailupaikka == null) {
             $errors[] = 'Kilpailupaikka ei saa olla tyhjä!';
         }
-        if (strlen($this->nimi) > 150) {
+        if (strlen($this->kilpailupaikka) > 150) {
             $errors[] = 'Nimi on liian pitkä!';
         }
         return $errors;
