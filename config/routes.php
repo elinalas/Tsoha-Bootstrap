@@ -34,10 +34,6 @@ $routes->get('/hevonen/:rekisterinumero', function($rekisterinumero) {
     HevonenController::show($rekisterinumero);
 });
 
-$routes->get('/osallistuminen/:id', function($id) {
-    OsallistuminenController::show($id);
-});
-
 $routes->get('/lisaa_osallistuminen', function() {
     OsallistuminenController::create();
 });
@@ -73,8 +69,12 @@ $routes->post('/osallistuminen/:id/muokkaa_osallistuminen', function($id) {
     OsallistuminenController::update($id);
 });
 
-$routes->post('/osalistuminen/:id/destroy', function($id) {
+$routes->post('/osallistuminen/:id/destroy', function($id) {
     OsallistuminenController::destroy($id);
+});
+
+$routes->post('/kayttaja/:id/destroy', function($jasennumero) {
+    KayttajaController::destroy($jasennumero);
 });
 
 
@@ -118,3 +118,6 @@ $routes->post('/kirjaudu_ulos', function() {
 $routes->post('/osallistuminen/:id/merkitse_maksetuksi', function($id) {
     OsallistuminenController::merkitse_osallistuminen_maksetuksi($id);
 });
+
+
+

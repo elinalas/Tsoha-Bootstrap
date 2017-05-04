@@ -61,7 +61,7 @@ class KilpailuController extends BaseController {
             Redirect::to('/kirjaudu_sisaan', array('message' => 'Vain ylläpitäjä voi muokata kilpailuja!'));
         }
         $kilpailu = Kilpailu::find($id);
-        View::make('kilpailu/muokkaa_kilpailu.html', array( 'attributes' => array('kilpailu' => $kilpailu)));
+        View::make('kilpailu/muokkaa_kilpailu.html', array( 'attributes' => $kilpailu));
     }
 
     public static function update($id) {
@@ -71,12 +71,13 @@ class KilpailuController extends BaseController {
         }
         $params = $_POST;
 
-        $attributes = new Kilpailu(array(
+        $attributes = array(
+            'id' => $id,
             'paivamaara' => $params['paivamaara'],
             'nimi' => $params['nimi'],
             'tasoluokitus' => $params['tasoluokitus'],
             'kilpailupaikka' => $params['kilpailupaikka']
-        ));
+        );
 
         $kilpailu = new Kilpailu($attributes);
         $errors = $kilpailu->errors();
@@ -84,10 +85,9 @@ class KilpailuController extends BaseController {
         if (count($errors) > 0) {
             View::make('kilpailu/muokkaa_kilpailu.html', array('errors' => $errors, 'attributes' => $attributes));
         } else {
-            // Kutsutaan alustetun olion update-metodia, joka päivittää pelin tiedot tietokannassa
             $kilpailu->update();
 
-            Redirect::to('/kilpailu/' . $kilpailu->id, array('message' => 'Kilpailua ei muokattu onnistuneesti!'));
+            Redirect::to('/kilpailu/' . $kilpailu->id, array('message' => 'Kilpailua muokattiin onnistuneesti!'));
         }
     }
 

@@ -8,6 +8,18 @@ class Kayttaja extends BaseModel {
         parent::__construct($attributes);
         $this->validators = array('validate_nimi', 'validate_jasennumero', 'validate_salasana');
     }
+    
+    public static function loyda_osallistumiset($jasennumero) {
+        $hevoset = Hevonen::findallkayttaja($jasennumero);
+        $osallistumiset = array();
+        foreach ($hevoset as $hevonen) {
+            $valitiedot = Osallistuminen::findallhevonen($hevonen->rekisterinumero);
+            foreach ($valitiedot as $tieto) {
+                $osallistumiset[] = $tieto;
+            }
+        }
+        return $osallistumiset;   
+    }
 
     public static function all() {
         // Alustetaan kysely tietokantayhteydellämme
@@ -85,11 +97,17 @@ class Kayttaja extends BaseModel {
 
     public function validate_jasennumero() {
         $errors = array();
-        if ($this->salasana == '' || $this->salasana == null) {
-            $errors[] = 'Jasennumero ei saa olla tyhjä!';
+        if ($this->jasennumero == '' || $this->jasennumero == null) {
+            $errors[] = 'Jäsennumero ei saa olla tyhjä!';
         }
         if (strlen($this->jasennumero) != 8) {
-            $errors[] = 'Jasennumeron tulee olla 6 merkkiä!';
+            $errors[] = 'Jäsennumeron tulee olla 8 merkkiä!';
+        }        
+        if (!is_numeric($this->jasennumero)) {
+            $errors[] = 'Jäsennumeron tulee sisältää vain numeroita!';
+        }
+        if (empty($errors) && Kayttaja::find($this->jasennumero)) {
+            $errors[] = 'Jäsennumerolla on luotu jo käyttäjä!';
         }
         return $errors;
     }
@@ -105,5 +123,12 @@ class Kayttaja extends BaseModel {
             return null;
         }
     }
+    
+    public function destroy() {
+        $query = DB::connection()->prepare('DELETE FROM Kayttaja WHERE jasennumero = :jasennumero');
+        $query->execute(array('jasennumero' => $this->jasennumero));
+        $row = $query->fetch();
+    }
 
+    
 }

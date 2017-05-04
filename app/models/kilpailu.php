@@ -96,7 +96,7 @@ class Kilpailu extends BaseModel {
     }
 
     public function update() {
-        $query = DB::connection()->prepare('UPDATE Kilpailu (paivamaara, nimi, tasoluokitus, kilpailupaikka) VALUES (:paivamaara, :nimi, :tasoluokitus, :kilpailupaikka) RETURNING id');
+        $query = DB::connection()->prepare('UPDATE Kilpailu SET paivamaara=:paivamaara, nimi=:nimi, tasoluokitus = :tasoluokitus, kilpailupaikka = :kilpailupaikka WHERE id = :id');
         $query->execute(array('id' => $this->id, 'paivamaara' => $this->paivamaara, 'nimi' => $this->nimi, 'tasoluokitus' => $this->tasoluokitus, 'kilpailupaikka' => $this->kilpailupaikka));
         $row = $query->fetch();
     }
@@ -113,7 +113,7 @@ class Kilpailu extends BaseModel {
             $errors[] = 'Nimi ei saa olla tyhjä!';
         }
         if (strlen($this->nimi) < 5) {
-            $errors[] = 'Nimen tulee olla vähintään 2 merkkiä! Esim. 50 cm tai Helppo C.';
+            $errors[] = 'Nimen tulee olla vähintään 5 merkkiä! Esim. 50 cm tai Helppo C.';
         }
         if (strlen($this->nimi) > 25) {
             $errors[] = 'Nimen tulee olla enintään 25 merkkiä. Käytä virallisia nimiä.';
@@ -123,14 +123,11 @@ class Kilpailu extends BaseModel {
 
     public function validate_paivamaara() {
         $errors = array();
-        if ($this->paivamaara == '' || $this->nimi == null) {
+        if ($this->paivamaara == '' || $this->paivamaara == null) {
             $errors[] = 'Päivämäärä ei saa olla tyhjä!';
         }
         if (strlen($this->paivamaara) != 10) {
-            $errors[] = 'Päivämäärä tulee olla muodossa pvm.kk.vuosi, esim. 12.01.2017.';
-        }
-        if (strpos($this->paivamaara, ':')) {
-            $errors[] = 'Päivämäärä tulee olla muodossa pvm.kk.vuosi, esim. 12.01.2017. Tarkista kaksoispisteet.';
+            $errors[] = 'Päivämäärä tulee olla muodossa vuosi-kk-pvm, esim. 2017-06-01.';
         }
         return $errors;
     }
@@ -141,10 +138,10 @@ class Kilpailu extends BaseModel {
             $errors[] = 'Tasoluokitus ei saa olla tyhjä!';
         }
         if (strlen($this->tasoluokitus) < 6) {
-            $errors[] = 'Tasoluokitus ei kelpaa. Tasoluokitus vähintään 6 merkkiä, esim. 1. taso';
+            $errors[] = 'Tasoluokituksen tulee olla 6-10 merkkiä, esim. 1. taso, 3. taso tai Harjoitus';
         }
         if (strlen($this->tasoluokitus) > 10) {
-            $errors[] = 'Tasoluokitus ei kelpaa. Tasoluokitus enintään 10 merkkiä. Voit merkitä maksimissaan: Harjoitus';
+            $errors[] = 'Tasoluokitus enintään 10 merkkiä.';
         }
         return $errors;
     }

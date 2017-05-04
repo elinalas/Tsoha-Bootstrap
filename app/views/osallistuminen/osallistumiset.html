@@ -51,22 +51,24 @@
             <td>
                 {% if user_logged_in and user_logged_in.status %}
                 <form style="display: inline-block" method="post" action="{{base_path}}/osallistuminen/{{osallistuminen.id}}/merkitse_maksetuksi">
-                    <button type="submit" class="btn btn-primary">Merkitse maksetuksi</button>
+                    <button type="submit" class="btn btn-primary">Vaihda maksustatusta</button>
                 </form>
                 {% endif %}
                 {% if user_logged_in %}
                 {% for hevonen in kayttajanhevoset %}
                 {% if osallistuminen.hevonen == hevonen.rekisterinumero %}
                 <form method="get" action="/kilpailujarjestelma/osallistuminen/{{osallistuminen.id}}/muokkaa_osallistuminen">
-                                <button type="submit" class="btn btn-primary">Muokkaa osallistumista</button>
+                    <button type="submit" class="btn btn-primary">Muokkaa osallistumista</button>
                 </form>
-                
-        {% endif %}
+                <form method="post" action="{{base_path}}/osallistuminen/{{osallistuminen.id}}/destroy" style="display: inline-block;">
+                    <button type="submit" class="btn btn-warning">Poista osallistuminen</button>
+                </form>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+            </td></tr>
         {% endfor %}
-        {% endif %}
-        </td></tr>
-        {% endfor %}
-        
+
     </tbody>
 </table>
 {% endblock %}

@@ -1,7 +1,6 @@
 <?php
-
-class KayttajaController extends BaseController {
-
+class KayttajaController extends BaseController{
+    
     public static function index() {
         !self::check_logged_in();
         if (!self::is_admin()) {
@@ -16,12 +15,10 @@ class KayttajaController extends BaseController {
 
         $kayttaja = Kayttaja::find($jasennumero);
         $hevoset = Hevonen::findallkayttaja($jasennumero);
-        $osallistumiset = array();
-        foreach ($hevoset as $hevonen) {
-            $osallistumiset += Osallistuminen::findallhevonen($hevonen->rekisterinumero);
-        }
+        $kilpailut = Kilpailu::all();
+        $osallistumiset = Kayttaja::loyda_osallistumiset($jasennumero);
 
-        View::make('kayttaja/kayttaja.html', array('kayttaja' => $kayttaja, 'hevoset' => $hevoset, 'osallistumiset' => $osallistumiset));
+        View::make('kayttaja/kayttaja.html', array('kayttaja' => $kayttaja, 'hevoset' => $hevoset, 'osallistumiset' => $osallistumiset, 'kilpailut' => $kilpailut));
     }
 
     public static function create() {
@@ -67,10 +64,23 @@ class KayttajaController extends BaseController {
             Redirect::to('/', array('message' => 'Tervetuloa takaisin ' . $kayttaja->nimi . '!'));
         }
     }
+
+    public static function logout() {
+        $_SESSION['kayttaja'] = session_destroy();
+        Redirect::to('/kirjaudu_sisaan', array('message' => 'Olet kirjautunut ulos!'));
+    }
+
+    public static function destroy($jasennumero) {
+        !self::check_logged_in();
+        if (!self::is_admin()) {
+            Redirect::to('/kirjaudu_sisaan', array('message' => 'Vain ylläpitäjä voi poistaa käyttäjiä!'));
+        }
+        $kayttaja = new Kayttaja(array('jasennumero' => $jasennumero));
+        $kayttaja->destroy();
+
+        Redirect::to('/kilpailut', array('message' => 'Käyttäjä on poistettu onnistuneesti!'));
+    }
     
-    public static function logout(){
-    $_SESSION['kayttaja'] =  session_destroy();
-    Redirect::to('/kirjaudu_sisaan', array('message' => 'Olet kirjautunut ulos!'));
-  }
+    
 
 }

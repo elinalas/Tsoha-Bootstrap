@@ -100,6 +100,12 @@ class Osallistuminen extends BaseModel {
         $row = $query->fetch();
     }
     
+    public static function merkitse_maksamattomaksi($id) {
+        $query = DB::connection()->prepare('UPDATE Osallistuminen SET maksettu = false WHERE id = :id');
+        $query->execute(array('id' => $id));
+        $row = $query->fetch();
+    }
+    
     public function save() {
         $query = DB::connection()->prepare('INSERT INTO Osallistuminen (kilpailu, hevonen, ratsastaja, ratsastajan_jasennumero) VALUES (:kilpailu, :hevonen, :ratsastaja, :ratsastajan_jasennumero) RETURNING id');
         $query->execute(array('kilpailu' => $this->kilpailu, 'hevonen' => $this->hevonen, 'ratsastaja' => $this->ratsastaja, 'ratsastajan_jasennumero' => $this->ratsastajan_jasennumero));
@@ -108,8 +114,8 @@ class Osallistuminen extends BaseModel {
     }
     
     public function update() {
-        $query = DB::connection()->prepare('UPDATE Osallistuminen (kilpailu, hevonen, ratsastaja, ratsastajan_jasennumero) VALUES (:kilpailu, :hevonen, :ratsastaja, :ratsastajan_jasennumero) RETURNING id');
-        $query->execute(array('kilpailu' => $this->kilpailu, 'hevonen' => $this->hevonen, 'ratsastaja' => $this->ratsastaja, 'ratsastajan_jasennumero' => $this->ratsastajan_jasennumero));
+        $query = DB::connection()->prepare('UPDATE Osallistuminen SET kilpailu = :kilpailu, hevonen = :hevonen, ratsastaja = :ratsastaja, ratsastajan_jasennumero = :ratsastajan_jasennumero WHERE id = :id');
+        $query->execute(array('id' => $this->id, 'kilpailu' => $this->kilpailu, 'hevonen' => $this->hevonen, 'ratsastaja' => $this->ratsastaja, 'ratsastajan_jasennumero' => $this->ratsastajan_jasennumero));
         $row = $query->fetch();
     }
 
@@ -155,7 +161,7 @@ class Osallistuminen extends BaseModel {
             $errors[] = 'Jasennumero ei saa olla tyhjä!';
         }
         if (strlen($this->ratsastajan_jasennumero) != 8) {
-            $errors[] = 'Jasennumeron tulee olla 6 merkkiä!';
+            $errors[] = 'Jasennumeron tulee olla 8 merkkiä!';
         }
         return $errors;
     }

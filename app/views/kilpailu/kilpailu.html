@@ -1,10 +1,5 @@
 {% extends "base.html" %}
 {% block content %}
-{% if message %}
-<div class="alert alert-success">
-    {{message}}
-</div>
-{% endif %}
 <h1>{{kilpailu.nimi}}</h1>
 {% if user_logged_in %}
 {% if user_logged_in.status == true %}
@@ -16,7 +11,7 @@
 {% endif %}
 <ul>
     <li><strong>Päivämäärä: </strong>{{kilpailu.paivamaara}}</li>
-    <li><strong>Tasoluokitus: </strong>{{kilpailu.tasoluokka}}</li>
+    <li><strong>Tasoluokitus: </strong>{{kilpailu.tasoluokitus}}</li>
     <li><strong>Kilpailupaikka: </strong>{{kilpailu.kilpailupaikka}}</li>
 </ul>
 
@@ -29,7 +24,6 @@
             <th>Ratsastaja</th>
             <th>Ratsastajan jäsennro</th>
             <th>Maksustatus</th>
-            <th></th>
         </tr>
     </thead>
 
@@ -46,16 +40,13 @@
             </td>
             <td>{{osallistuminen.ratsastaja}}</td>
             <td>{{osallistuminen.ratsastajan_jasennumero}}</td>
-            {% if osallistuminen.maksettu == false %}
-            <td><label class="label label-danger">Ei maksettu</label></td>
-            {%else%}
-            <td><label class="label label-primary">Maksettu</label></td>
-            {%endif%}
-            {%if user_logged_in%} 
-            {% if user_logged_in.status == true %}
-            <th><a class="btn btn-default btn-sm" href="/kilpailujarjestelma/muokkaa_osallistuminen">Muokkaa</a></th>
-            {% endif %}
-            {% endif %}
+            <td>
+                {% if osallistuminen.maksettu == false %}
+                <label class="label label-danger">Ei maksettu</label>
+                {%else%}
+                <label class="label label-primary">Maksettu</label>
+                {%endif%}
+            </td>
         </tr>      
         {% endfor %}
 

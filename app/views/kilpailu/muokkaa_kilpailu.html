@@ -1,31 +1,33 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Muokkaa kilpailua</h1>
+<h1>Muokkaa kilpailua</h1>
 
-<form method="post" action="{{base_path}}/kilpailu">
-   
-    <div class="form-group">
-      <label>Päivämäärä</label>
-      <input type="text" name="paivamaara" class="form-control" value="{{kilpailu.paivamaara}}">
-    </div>
-    <div class="form-group">
-      <label>Kilpailun nimi</label>
-      <input type="text" name="nimi" class="form-control" value="{{kilpailu.nimi}}">
-    </div>
-    <div class="form-group">
-      <label>Tasoluokitus</label>
-      <input type="text" name="tasoluokitus" class="form-control" value="{{kilpailu.tasoluokitus}}">
-    </div>
-    <div class="form-group">
-      <label>Kilpailupaikka</label>
-      <input type="text" name="kilpailupaikka" class="form-control" value="{{kilpailu.kilpailupaikka}}">
-    </div>
+
+
+<form method="post" action="{{base_path}}/kilpailu/{{attributes.id}}/muokkaa_kilpailu">
 
     <div class="form-group">
-      <button type="submit" class="btn btn-danger">Tallenna</button>
-      <a href="{{base_path}}/kilpailut" class="btn btn-primary">Peruuta</a>
-      
+        <label>Päivämäärä</label>
+        <input type="text" name="paivamaara" class="form-control" value="{{attributes.paivamaara}}">
+    </div>
+    <div class="form-group">
+        <label>Kilpailun nimi</label>
+        <input type="text" name="nimi" class="form-control" value="{{attributes.nimi}}">
+    </div>
+    <div class="form-group">
+        <label>Tasoluokitus</label>
+        <input type="text" name="tasoluokitus" class="form-control" value="{{attributes.tasoluokitus}}">
+    </div>
+    <div class="form-group">
+        <label>Kilpailupaikka</label>
+        <input type="text" name="kilpailupaikka" class="form-control" value="{{attributes.kilpailupaikka}}">
     </div>
 
-  </form>
+    <div class="form-group">
+        <button type="submit" class="btn btn-danger">Tallenna</button>
+        <a href="{{base_path}}/kilpailut" class="btn btn-primary">Peruuta</a>
+
+    </div>
+
+</form>
 {% endblock %}

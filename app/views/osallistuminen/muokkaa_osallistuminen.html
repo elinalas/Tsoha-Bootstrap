@@ -1,30 +1,46 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Muokkaa osallistumista</h1>
+<h1>Muokkaa osallistumista</h1>
 
-  <form method="post" action="{{base_path}}/osallistuminen">
+<form method="post" action="{{base_path}}/osallistuminen/{{attributes.id}}/muokkaa_osallistuminen">
     <div class="form-group">
-      <label>Kilpailu</label>
-      <input type="text" class="form-control" value="{{kilpailu.nimi}}">
+        <label>Kilpailu</label>
+        <select class="form-control" name="kilpailu">
+        {% for kilpailu in kaikkikilpailut %}
+            {% if kilpailu.id == attributes.kilpailu %}
+                <option value="{{kilpailu.id}}" selected>{{kilpailu.nimi}}</option>
+            {% else %}
+                <option value="{{kilpailu.id}}">{{kilpailu.nimi}}</option>
+            {% endif %}
+        {% endfor %}
+        </select>
     </div>
     <div class="form-group">
-      <label>Hevonen</label>
-      <input type="text" class="form-control" value="{{hevonen.nimi}}">
+        <label>Hevonen</label>
+        <select class="form-control" name="hevonen">
+            {% for hevonen in omathevoset %}
+                {% if hevonen.rekisterinumero == attributes.hevonen %}
+                    <option value="{{hevonen.rekisterinumero}}" selected>{{hevonen.nimi}}</option>
+                {% else %}
+                    <option value="{{hevonen.rekisterinumero}}">{{hevonen.nimi}}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
     </div>
     <div class="form-group">
-      <label>Ratsastaja</label>
-      <input type="text" class="form-control" value="{{osallistuminen.ratsastaja}}">
+        <label>Ratsastaja</label>
+        <input type="text" class="form-control" name="ratsastaja" value="{{attributes.ratsastaja}}">
     </div>
     <div class="form-group">
-      <label>Ratsastajan jäsennumero</label>
-      <input type="text" class="form-control" value="{{osallistuminen.ratsastajan_jasennumero}}">
+        <label>Ratsastajan jäsennumero</label>
+        <input type="text" class="form-control" name="ratsastajan_jasennumero" value="{{attributes.ratsastajan_jasennumero}}">
     </div>
 
     <div class="form-group">
-      <button type="submit" class="btn btn-danger">Tallenna</button>
-      <a href="{{base_path}}/osallistumiset" class="btn btn-primary">Peruuta</a>
-      
+        <button type="submit" class="btn btn-danger">Tallenna</button>
+        <a href="{{base_path}}/osallistumiset" class="btn btn-primary">Peruuta</a>
+
     </div>
 
-  </form>
+</form>
 {% endblock %}

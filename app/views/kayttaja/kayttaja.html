@@ -1,10 +1,5 @@
 {% extends "base.html" %}
 {% block content %}
-{% if message %}
-<div class="alert alert-success">
-    {{message}}
-</div>
-{% endif %}
 <h1>{{kayttaja.nimi}}</h1>
 <!-- Painikkeet tähän -->
 {% if user_logged_in %}
@@ -34,26 +29,39 @@
             <th>Ratsastaja</th>
             <th>Ratsastajan jäsennro</th>
             <th>Maksustatus</th>
-            <th></th>
+
+
         </tr>
     </thead>
 
     <tbody>
         {% for osallistuminen in osallistumiset %}
-        <!-- Listataan pelit tähän -->
         <tr>
-            <td><a href="{{base_path}}/kilpailu/{{osallistuminen.kilpailu}}">{{osallistuminen.kilpailu}}</a></td>
-            <td><a href="{{base_path}}/hevonen/{{osallistuminen.hevonen}}">{{osallistuminen.hevonen}}</a></td>
+            <td>
+                {% for kilpailu in kilpailut %}
+                {% if osallistuminen.kilpailu == kilpailu.id %}
+                <a href="/kilpailujarjestelma/kilpailu/{{kilpailu.id}}">{{kilpailu.nimi}}</a>
+                {% endif %}
+                {% endfor %}
+            </td>
+            <td>
+                {% for hevonen in hevoset %}
+                {% if osallistuminen.hevonen == hevonen.rekisterinumero %}
+                <a href="/kilpailujarjestelma/hevonen/{{hevonen.rekisterinumero}}">{{hevonen.nimi}}</a>
+                {% endif %}
+                {% endfor %}
+            </td>
             <td>{{osallistuminen.ratsastaja}}</td>
             <td>{{osallistuminen.ratsastajan_jasennumero}}</td>
-            {% if osallistuminen.maksettu == false %}
-            <td><label class="label label-danger">Ei maksettu</label></td>
-            {% else %}
-            <td><label class="label label-primary">Maksettu</label></td>
-            {% endif %}
-            <th><a class="btn btn-default btn-sm" href="/kilpailujarjestelma/muokkaa_osallistuminen">Muokkaa</a></th>
-        </tr>
+            <td>
+                {% if osallistuminen.maksettu %}
+                {{osallstuminen.maksettu}}<label class="label label-success">Maksettu</label>
+                {% else %}
+                {{osallstuminen.maksettu}}<label class="label label-danger">Ei maksettu</label>
+                {% endif %}
+            </td></tr>
         {% endfor %}
+
     </tbody>
 </table>
 
@@ -72,7 +80,7 @@
         {% for hevonen in hevoset%}
         <!-- Listataan pelit tähän -->
         <tr>
-            <td><a href="/kilpailujarjestelma/hevonen/:hevonen_rekisterinumero">{{hevonen.nimi}}</a></td>
+            <td><a href="/kilpailujarjestelma/hevonen/{{hevonen.rekisterinumero}}">{{hevonen.nimi}}</a></td>
             <td>{{hevonen.rekisterinumero}}</td>
             <td>{{hevonen.kokoluokka}}</td>
         </tr>

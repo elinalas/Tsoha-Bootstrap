@@ -2,21 +2,12 @@
 {% block content %}
   <h1>Lisaa kilpailu</h1>
   
-  {% if errors %}
-    <div class="alert alert-danger">
-      <ul>
-        {% for error in errors %}
-          <li>{{error}}</li>
-        {% endfor %}
-      </ul>
-    </div>
-  {% endif %}
 
 <form method="post" action="{{base_path}}/kilpailu">
    
     <div class="form-group">
       <label>Päivämäärä</label>
-      Muodossa 00.00.0000
+      Muodossa vuosi-kk-pvm.
       <input type="text" name="paivamaara" class="form-control" value="{{attributes.paivamaara}}">
     </div>
     <div class="form-group">
@@ -26,7 +17,7 @@
     </div>
     <div class="form-group">
       <label>Tasoluokitus</label>
-      1./2./3. taso
+      Esim. 1./2./3. taso/Harjoitus
       <input type="text" name="tasoluokitus" class="form-control" value="{{attributes.tasoluokitus}}">
     </div>
     <div class="form-group">

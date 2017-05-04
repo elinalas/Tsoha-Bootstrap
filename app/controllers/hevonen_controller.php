@@ -1,5 +1,7 @@
 <?php
 class HevonenController extends BaseController{
+    static $kokoluokka = array('hevonen', 'poni');
+    
   public static function index(){
     !self::check_logged_in();
     if (!self::is_admin()) {
@@ -19,7 +21,7 @@ class HevonenController extends BaseController{
   
   public static function create(){
     !self::check_logged_in();
-    View::make('hevonen/lisaa_hevonen.html');
+    View::make('hevonen/lisaa_hevonen.html', array('kokoluokka' => Hevonen::$kokoluokat));
   }
   
   public static function store() {
@@ -29,7 +31,7 @@ class HevonenController extends BaseController{
         $attributes = array(
             'nimi' => $params['nimi'],
             'rekisterinumero' => $params['rekisterinumero'],
-            'kayttaja' => $params['kayttaja'],
+            'kayttaja' => self::get_user_logged_in()->jasennumero,
             'kokoluokka' => $params['kokoluokka']);
         
         $hevonen = new Hevonen($attributes);
@@ -39,7 +41,7 @@ class HevonenController extends BaseController{
             $hevonen->save();
             Redirect::to('/hevonen/' . $hevonen->rekisterinumero, array('message' => 'Uusi hevonen on lisätty!'));
         } else {
-            View::make('hevonen/lisaa_hevonen.html', array('errors' => $errors, 'attributes' => $attributes));
+            View::make('hevonen/lisaa_hevonen.html', array('kokoluokka' => Hevonen::$kokoluokat, 'errors' => $errors, 'attributes' => $attributes));
         }
         
         
@@ -55,21 +57,21 @@ class HevonenController extends BaseController{
        Redirect::to('/kirjaudu_sisaan', array('message' => 'Vain omistaja voi muokata hevostaan!'));
     }
    
-    View::make('hevonen/muokkaa_hevonen.html', array('attributes' => $hevonen));
+    View::make('hevonen/muokkaa_hevonen.html', array('attributes' => $hevonen, 'kokoluokka' => self::$kokoluokka));
   }
   
   
   public static function destroy($rekisterinumero){
     self::check_logged_in();
     
-    $hevonen = new Hevonen(array('rekisterinumero' => $rekisterinumero));
-    if (self::get_user_logged_in()->jasennumero != $hevonen->omistaja) {
+    $hevonen = Hevonen::find($rekisterinumero);
+    if (self::get_user_logged_in()->jasennumero != $hevonen->kayttaja && !self::is_admin()) {
        Redirect::to('/kirjaudu_sisaan', array('message' => 'Vain omistaja voi poistaa hevosen!'));
     }
    
     $hevonen->destroy();
 
-    Redirect::to('/hevoset', array('message' => 'Hevonen on poistettu onnistuneesti!'));
+    Redirect::to('/kayttaja/' . self::get_user_logged_in()->jasennumero, array('message' => 'Hevonen on poistettu onnistuneesti!'));
   }
   
 }

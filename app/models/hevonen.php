@@ -1,6 +1,7 @@
 <?php
 
 class Hevonen extends BaseModel {
+    public static $kokoluokat = array('Hevonen', 'Poni');
 
     public $nimi, $rekisterinumero, $kayttaja, $kokoluokka;
 
@@ -130,19 +131,23 @@ class Hevonen extends BaseModel {
         }
         if (strlen($this->rekisterinumero) < 14) {
             $errors[] = 'Tarkistathan, että rekisterinumero vastaa hevosen oikeaa rekisterinumeroa. '
-                    . 'Pituuden tulee olla vähintään 14 merkkiä.';
+                    . 'Pituuden tulee olla 14-15 merkkiä.';
         }
         if (strlen($this->rekisterinumero) > 15) {
             $errors[] = 'Tarkistathan, että rekisterinumero vastaa hevosen oikeaa rekisterinumeroa. Pituus saa olla enintään 15 merkkiä.';
+        }
+        if(empty($errors) && Hevonen::find($this->rekisterinumero)) {
+            $errors[] = 'Tällä rekisterinumerolla on jo luotu hevonen!';
         }
         
         return $errors;
     }
     
+    
     public function validate_kokoluokka() {
         $errors = array();
-        if ($this->kokoluokka != 'Hevonen' && $this->kokoluokka != 'Poni') {
-            $errors[] = 'Luomasi hevosen kokoluokan tulee olla: Hevonen tai Poni. Valitse oikea kokoluokka.';
+        if (!in_array($this->kokoluokka, self::$kokoluokat)) {
+            $errors[] = 'Valitse oikea kokoluokka.';
         }
         return $errors;
     }
