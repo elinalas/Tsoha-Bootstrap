@@ -1,9 +1,8 @@
 # Kilpailujärjestelmä
 
-* [Linkki sovellukseeni](https://elinalas.users.cs.helsinki.fi/kilpailujarjestelma)
-Kaikissa toimii listaus- ja esittelysivut. Huomaathan, että uusia hevosia voi lisätä vain valmiilla käyttäjien rekisterinumeroilla! Tämä tullaan myöhemmin muokkaamaan erilaiseksi. 
+* [Linkki sovellukseeni](https://elinalas.users.cs.helsinki.fi/kilpailujarjestelma) 
 Ylläpitäjän tunnukset: Elina Lassila (salasana: Elina Lassila)
-Tavallisen käyttäjän tunnukset: Hauska Hessu (salasana: Hauska Hessu)
+Tavallisen käyttäjän tunnukset: Tee omat :)
 
 
 
